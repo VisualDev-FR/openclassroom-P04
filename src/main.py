@@ -3,6 +3,6 @@ from Views.appInputs import AppInput
 
 print(" ")
 
-for i in range (1, 8):
-    myPlayer:Player = AppInput.inputPlayer(i)
+for i in range (1, 9):
+    myPlayer:Player = AppInput.randomPlayer(i)
     print(" ")

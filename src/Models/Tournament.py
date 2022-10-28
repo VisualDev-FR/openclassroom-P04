@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 from enum import Enum
 from typing import List
 
@@ -18,7 +18,7 @@ class Tournament:
         
     __m_name:str                    #Name of the tournament
     __m_location:str                #Location of the tournament
-    __m_date:date                   #Date of the tournament
+    __m_date:datetime                  #Date of the tournament
     __m_roundsList:List[Round]      #List of all tournament's rounds
     __m_playersList:List[Player]    #List of the tournament's players
     __m_timecontrol:TimeControl     #Used time control for the tournament
