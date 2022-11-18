@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from Models.player import Player
 
 class Round:
     
@@ -6,17 +7,38 @@ class Round:
     __m_name:str
     __m_beginDate:datetime
     __m_endDate:str
+    __m_index:int
     
-    def __init__(self) -> None:
-        pass
+    def __init__(self, index:int) -> None:
+        self.__m_matchList = []
+        self.__m_name = "Round {i}".format(i=index)
+        self.__m_index = index
     
     def begin(cls)->None:
-        #set begin date
-        pass
-    
-    def end(cls)->None:
-        #set endDate
-        pass
+        cls.__m_beginDate = datetime.now()
 
-    def addMatch()->None:
-        pass
+    def end(cls)->None:
+        cls.__m_endDate = datetime.now()
+
+    def getIndex(cls)->int:
+        return cls.__m_index
+
+    def getBeginDate(cls)->datetime:
+        return cls.__m_beginDate
+
+    def getEndDate(cls)->datetime:
+        return cls.__m_endDate
+
+    def getName(cls)->str:
+        return cls.__m_name
+
+    def addMatch(cls, player1:Player, player2:Player)->None:
+        cls.__m_matchList.append(
+            (
+                [player1, player1.getScore],
+                [player2, player2.getScore] 
+            )         
+        )
+
+    def getMatchs(cls)->list:
+        return cls.__m_matchList

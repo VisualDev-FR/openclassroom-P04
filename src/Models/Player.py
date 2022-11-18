@@ -40,13 +40,19 @@ class Player:
         self.__m_assessement = serializedPlayer[ASSESSEMENT_KEY]
         return self
 
-    def increaseScore(self):
+    def increaseScore(self)->None:
         self.__m_score += 1
+
+    def setScore(cls, newScore:int)->None:
+        cls.__m_score = newScore
     
-    def getScore(cls):
+    def getScore(cls)->int:
         return cls.__m_score
     
-    def getAssessement(cls):
+    def getFullName(cls)->str:
+        return "{firstName} {lastName}".format(firstName = cls.__m_firstName, lastName=cls.__m_lastName)
+    
+    def getAssessement(cls)->int:
         return cls.__m_assessement
 
     def encountered(cls, player:Self)->bool:

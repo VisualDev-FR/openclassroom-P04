@@ -1,10 +1,7 @@
 from datetime import datetime
 from enum import Enum
-from typing import List
-
-from Models.match import Match
-from Models.round import Round
-from Models.player import Player
+from Models.round import *
+from Models.player import *
 
 class TimeControl(Enum):
     BULLET = 0
@@ -41,3 +38,9 @@ class Tournament:
 
     def getPlayersCount(cls)->int:
         return cls.__m_playersCount
+
+    def getRoundsCount(cls)->int:
+        return cls.__m_roundsCount
+
+    def getPlayers(cls)->int:
+        return cls.__m_playersList
