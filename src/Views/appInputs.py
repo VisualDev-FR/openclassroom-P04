@@ -2,6 +2,8 @@ from datetime import date, datetime
 import random
 from Models.player import Gender
 from Models.player import Player
+from Models.tournament import Tournament
+from Models.tournament import TimeControl
 
 class AppInput:
     
@@ -20,7 +22,40 @@ class AppInput:
         print("    Anniversaire : " + inBirthDay)
         print("    Genre : " + inGender.name)
 
-        return Player(firstName=inFirstName, lastName=inLastName, birthday=inBirthDay, gender=inGender)    
+        return Player(firstName=inFirstName, lastName=inLastName, birthday=inBirthDay, gender=inGender)
+
+    @classmethod
+    def randomTournament(cls)->Tournament: 
+
+        print("Veuillez spécifier un nouveau tournoi :")
+
+        roundsCount = random.choice([1, 2, 3, 4 ,5 ,6, 7, 8])
+        playersCount = random.choice([4 ,6 ,8, 10, 12])
+        name = random.choice(["Tournoi amical du club d'échec de Vitrolles", "Championnats de France d'echecs"])
+        location = random.choice(["Vitrolles", "Paris", "Marseilles", "Lyon", "Strasbourg", "Bourg-en-Bresse", "Dunkerque"])
+        tDate = random.choice(["18/11/2019", "18/11/2020", "18/11/2021", "18/11/2022"])
+        timeControl = random.choice([0, 1, 2])
+        description = random.choice(["Tournoi Amical", "Tournoi amical en vue de la préparation des championnats de france", "Tournoi Homme vs Machine"])
+
+        print("    Nombre de tours : " + str(roundsCount))
+        print("    Nombre de joueurs : " + str(playersCount))
+        print("    Nom du trournoi : " + name)
+        print("    Lieu du tournoi : " + location)
+        print("    Date du tournoi : " + tDate)
+        print("    Format de temps Bullet[0] Blitz[1] Rapid[2]: " + str(timeControl))
+        print("    Descritpion : " + description)
+
+        print(" ")
+
+        return Tournament(
+            roundsCount=roundsCount, 
+            playersCount=playersCount, 
+            name=name, 
+            location=location, 
+            date=tDate, 
+            timeControl=timeControl, 
+            description=description
+        )
     
     @classmethod
     def inputPlayer(cls, playerIndex:int)->Player:
@@ -32,8 +67,44 @@ class AppInput:
         inBirthDay = cls.__dateInput("Anniversaire")
         inGender = cls.__genderInput()
         
-        return Player.create(firstName=inFirstName, lastName=inLastName, birthday=inBirthDay, gender=inGender)
+        return Player(firstName=inFirstName, lastName=inLastName, birthday=inBirthDay, gender=inGender)
+
+    @classmethod
+    def inputTournament(cls)->Tournament:
+        roundsCount = cls.__intInput("Nombre de tours")
+        playersCount = cls.__intInput("Nombre de joueurs")
+        name = cls.__stringInput("Nom du trournoi")
+        location = cls.__stringInput("Lieu du tournoi")
+        tDate = cls.__dateInput("Date du tournoi")
+        timeControl = cls.__timeControlInput()
+        description = cls.__stringInput("Descritpion")
+
+        print(" ")
+
+        return Tournament(
+            roundsCount=roundsCount, 
+            playersCount=playersCount, 
+            name=name, 
+            location=location, 
+            date=tDate, 
+            timeControl=timeControl, 
+            description=description
+        )         
     
+    @staticmethod
+    def __intInput(message:str)->int:
+
+        inputValue = -1
+
+        while inputValue == -1:
+
+            try:
+                inputValue = int(input("    "  + message + " : "))                
+            except:
+                print("    Erreur dans le format d'entrée. Veuillez renseigner une nombre entier.")
+
+        return inputValue
+
     @staticmethod
     def __stringInput(message:str)->str:
         return input("    "  + message + " : ")
@@ -65,3 +136,17 @@ class AppInput:
                 pass
  
         return genderIn
+
+    @staticmethod
+    def __timeControlInput()->TimeControl:
+        
+        timeControl:TimeControl = None
+
+        while (timeControl == None):
+            try:            
+                timeControl = int(input("    Format de temps Bullet[0] Blitz[1] Rapid[2]: "))
+                timeControl = timeControl(timeControl) 
+            except:
+                pass
+ 
+        return timeControl        

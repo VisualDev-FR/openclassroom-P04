@@ -1,18 +1,22 @@
+from datetime import date, datetime
 
 class Round:
     
-    __m_matchList = []
-    __m_name = ""
-    __m_beginDate = ""
-    __m_endDate = ""
+    __m_matchList:list
+    __m_name:str
+    __m_beginDate:datetime
+    __m_endDate:str
     
     def __init__(self) -> None:
         pass
     
-    def begin(cls):
+    def begin(cls)->None:
         #set begin date
         pass
     
-    def end(cls):
+    def end(cls)->None:
         #set endDate
+        pass
+
+    def addMatch()->None:
         pass

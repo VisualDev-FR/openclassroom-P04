@@ -7,25 +7,37 @@ from Models.round import Round
 from Models.player import Player
 
 class TimeControl(Enum):
-    BULLET = 1
-    BLITZ = 2
-    RAPID = 3
+    BULLET = 0
+    BLITZ = 1
+    RAPID = 2
 
 class Tournament:
 
-    ROUNDS_COUNT:int = 4            #Count of rounds for one tournament
-    PLAYERS_COUNT:int = 8           #Count of players in the tournament
-        
+    __m_roundsList:list      #List of all tournament's rounds
+    __m_playersList:list    #List of the tournament's players
+
+    __m_roundsCount:int             #Number of rounds played in the tournament
+    __m_playersCount:int            #Number of players participating to the tournament
     __m_name:str                    #Name of the tournament
     __m_location:str                #Location of the tournament
-    __m_date:datetime                  #Date of the tournament
-    __m_roundsList:List[Round]      #List of all tournament's rounds
-    __m_playersList:List[Player]    #List of the tournament's players
+    __m_date:datetime               #Date of the tournament
     __m_timecontrol:TimeControl     #Used time control for the tournament
     __m_Description:str             #Description of the tournament
 
-    def __init__(self, timeControl:TimeControl, name:str, ) -> None:
-        pass
-    
+    def __init__(self, roundsCount:int, playersCount:int, name:str, location:str, date:datetime, timeControl:TimeControl, description:str) -> None:
+        self.__m_roundsCount = roundsCount
+        self.__m_playersCount = playersCount
+        self.__m_name = name
+        self.__m_location = location
+        self.__m_date = date
+        self.__m_timecontrol = timeControl
+        self.__m_Description = description 
 
-        
+        self.__m_playersList = []
+        self.__m_roundsList = []
+
+    def addPlayer(cls, player:Player)->None:
+        cls.__m_playersList.append(player)
+
+    def getPlayersCount(cls)->int:
+        return cls.__m_playersCount

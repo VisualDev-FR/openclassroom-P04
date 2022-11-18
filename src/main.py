@@ -1,8 +1,13 @@
 from Models.player import Player
+from Models.tournament import Tournament
 from Views.appInputs import AppInput
 
 print(" ")
 
-for i in range (1, 9):
-    myPlayer:Player = AppInput.randomPlayer(i)
+tournament = AppInput.randomTournament()
+
+for i in range (tournament.getPlayersCount()):
+    newPlayer = AppInput.randomPlayer(i)
+    tournament.addPlayer(newPlayer)
     print(" ")
+
