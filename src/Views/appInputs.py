@@ -88,6 +88,22 @@ def inputTournament()->Tournament:
         description=description
     )         
 
+def inputWinner(player1:Player, player2:Player)->Player:
+
+    winner:Player = None
+
+    while winner == None:
+        winnerIndex = input("    {p1}[0] vs {p2}[1] : vainqueur = ".format(p1=player1.getFullName(), p2=player2.getFullName()))
+
+        if winnerIndex == "0":
+            winner = player1
+        elif winnerIndex == "1":
+            winner = player2
+        else:
+            print("    Veuillez rentrer un nombre entre 0 et 1 pour désigner le vainqueur.")
+
+    return winner
+
 def __intInput(message:str)->int:
 
     inputValue = -1
@@ -112,6 +128,8 @@ def __dateInput(message:str)->datetime:
     
         try:
             dateIn = datetime.strptime(input("    " + message + " : "), "%d/%m/%Y")
+        except KeyboardInterrupt:
+            raise ValueError("Sortie de fonction")
         except:
             print("    Erreur dans le format de date, veuillez spécifier une date au format jj/mm/aaaa")
 
