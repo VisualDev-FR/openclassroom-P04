@@ -3,7 +3,7 @@ from Models.round import Round
 
 def generateRound(tournament:Tournament, roundIndex:int)->Round:
     
-    sortedPlayers:list = getSortedPlayers(tournament)
+    sortedPlayers:list = getScoreSortedPlayers(tournament)
     newRound = Round(roundIndex)
 
     for i in range(int(len(sortedPlayers) / 2)):
@@ -15,5 +15,8 @@ def generateRound(tournament:Tournament, roundIndex:int)->Round:
 
     return newRound
 
-def getSortedPlayers(tournament:Tournament)->list:
+def getScoreSortedPlayers(tournament:Tournament)->list:
         return  sorted(tournament.getPlayers(), key=lambda player: player.getScore(), reverse=True)
+
+def getNameSortedPlayers(tournament:Tournament)->list:
+        return  sorted(tournament.getPlayers(), key=lambda player: player.getLastName())

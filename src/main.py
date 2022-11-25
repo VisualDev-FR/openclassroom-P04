@@ -1,47 +1,44 @@
-import random
-import Views.appInputs as AppInput
-import Views.appView as AppView
-import Controllers.RoundFactory as RoundFactory
-from Models.tournament import *
+from Controllers.tournamentManager import  *
+from Controllers.playerManager import *
+from Views.appView import *
+import os
 
-print(" ")
+runtime = True
 
-# ask to the user to give the tournaments inputs
-tournament:Tournament = AppInput.randomTournament()
+while runtime :
 
-# players input parsing
-for i in range(tournament.getPlayersCount()):
+    os.system('cls')
 
-    # ask to the user to give inputs for player i
-    newPlayer:Player = AppInput.inputPlayer(i)
+    AppView.printSection("MENU PRINCIPAL")
 
-    # add that player to the tournament
-    tournament.addPlayer(newPlayer)
+    print("[1] : Créer un nouveau tournoi")
+    print("[2] : Créer un nouveau joueur")    
+    print("[3] : Charger un tournoi existant")
+    print("[4] : Modifier le classement d'un joueur")
+    print("[5] : Quitter l'application\n")
 
+    AppView.printSection(" ")
 
-# generation des pairs du 1er tour
+    choice = input()
 
+    AppView.clearConsole()
 
-# rounds generation
-for i in range(tournament.getRoundsCount() - 1):
-    
-    # generate one round, given the tournament state
-    nextRound = RoundFactory.generateRound(tournament, i)
-    
-    # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne' 
-    AppView.printRound(nextRound)
+    if(choice == "1"):
+        # open the tournamentFactory
+        createTournament()
 
-    # parsing of the round results    
-    for match in nextRound.getMatchs():
+    elif choice == "2":
+        createPlayer()
 
-        player1:Player = match[0][0]
-        player2:Player = match[1][0]
+    elif choice == "3":
+        pass
 
-        # ask to the user, the results of the match n
-        winner:Player = AppInput.inputWinner(player1, player2)
-        winner.increaseScore()
-    
-    print(" ")
+    elif choice == "4":
+        displayPlayers()
 
-for player in RoundFactory.getSortedPlayers(tournament):
-    print(player.getFullName() + " " + str(player.getScore()))
+    elif choice == "5":
+
+        AppView.clearConsole()
+
+        # exit the application
+        runtime = False
