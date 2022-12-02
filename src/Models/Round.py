@@ -42,3 +42,16 @@ class Round:
 
     def getMatchs(cls)->list:
         return cls.__m_matchList
+
+    def serialize(cls)->dict:
+
+        serializedRound = {}
+
+        for i in range(len(cls.__m_matchList)):
+            
+            player1:Player = cls.__m_matchList[i][0][0]
+            player2:Player = cls.__m_matchList[i][1][0]  
+
+            serializedRound["Match " + str(i)] = player1.getFullName() + " vs " + player2.getFullName()
+
+        return serializedRound

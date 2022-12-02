@@ -5,6 +5,7 @@ import Views.appView as AppView
 import Controllers.roundManager as roundManager
 import Controllers.playerManager as playerManager
 import Controllers.dbManager as database
+import dbManager
 
 def createTournament():
 
@@ -41,6 +42,7 @@ def createTournament():
         
         # generate one round, given the tournament state
         nextRound = roundManager.generateRound(tournament, i)
+        tournament.addRound(nextRound)
         
         # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne' 
         AppView.printRound(nextRound)
@@ -69,6 +71,9 @@ def createTournament():
     for player in roundManager.getNameSortedPlayers(tournament):
         player.setAssessement(AppInput.intInput(player.getFullName()))
         database.updatePlayer(player)
+
+    # at the end, we save the created tournament into the database
+    dbManager.saveTournament(tournament)
 
     # print the current section
     AppView.printSection("FIN")

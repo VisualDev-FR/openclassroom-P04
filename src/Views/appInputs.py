@@ -50,7 +50,7 @@ def dateInput(message:str)->datetime:
         try:
             dateIn = datetime.strptime(input(message + " : "), DATE_FORMAT)
         except KeyboardInterrupt:
-            raise ValueError("Sortie de fonction")
+            exit()
         except:
             print("    Erreur dans le format de date, veuillez spécifier une date au format jj/mm/aaaa")
 

@@ -30,8 +30,8 @@ class Player:
     def deserialize(self, serializedPlayer:dict) -> Self:
         lastName = serializedPlayer[LAST_NAME_KEY]
         firstName = serializedPlayer[FIRST_NAME_KEY]
-        birthDay = serializedPlayer[BIRTHDAY_KEY]
-        gender = Gender(serializedPlayer[GENDER_KEY])
+        birthDay = datetime.strptime(serializedPlayer[BIRTHDAY_KEY], DATE_FORMAT)
+        gender = Gender[serializedPlayer[GENDER_KEY]].value
         assessement = serializedPlayer[ASSESSEMENT_KEY]
         
         return Player(
@@ -81,7 +81,7 @@ class Player:
             LAST_NAME_KEY:cls.__m_lastName,
             FIRST_NAME_KEY:cls.__m_firstName,
             BIRTHDAY_KEY:cls.__m_birthDay.strftime(DATE_FORMAT),
-            GENDER_KEY:cls.__m_gender.value,
+            GENDER_KEY:Gender(cls.__m_gender).name,
             SCORE_KEY:cls.__m_score,
             ASSESSEMENT_KEY:cls.__m_assessement
         }

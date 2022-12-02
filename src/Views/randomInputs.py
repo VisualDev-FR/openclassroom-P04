@@ -49,7 +49,7 @@ def randomTournament()->Tournament:
         playersCount=playersCount, 
         name=name, 
         location=location, 
-        date=tDate, 
+        date=datetime.strptime(tDate, DATE_FORMAT), 
         timeControl=timeControl, 
         description=description
     )

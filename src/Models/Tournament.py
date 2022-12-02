@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import Enum
 from Models.round import *
 from Models.player import *
+from Config.tournamentConst import *
 
 class TimeControl(Enum):
     BULLET = 0
@@ -42,5 +43,56 @@ class Tournament:
     def getRoundsCount(cls)->int:
         return cls.__m_roundsCount
 
+    def addRound(cls, roundToAdd:Round):
+        return cls.__m_roundsList.append(roundToAdd)
+
     def getPlayers(cls)->int:
         return cls.__m_playersList
+
+    def getSerializedRounds(cls)->dict:
+        
+        serializedRounds = {}
+
+        for round in cls.__m_roundsList:
+            serializedRounds[round.getName()] = round.serialize()
+        
+        return serializedRounds
+
+    def getSerializedPlayers(cls)->dict:
+        
+        serializedPlayers = {}
+
+        for player in cls.__m_playersList:
+            serializedPlayers[player.getFullName()] = player.serialize()
+        
+        return serializedPlayers
+
+    def serialize(cls)->dict:
+
+        return {
+            NAME_KEY:cls.__m_name,
+            LOCATION_KEY:cls.__m_location,
+            DATE_KEY:cls.__m_date.strftime(DATE_FORMAT),
+            ROUNDS_COUNT_KEY:cls.__m_roundsCount,
+            ROUNDS_KEY:cls.getSerializedRounds(),
+            PLAYERS_KEY:cls.getSerializedPlayers(),
+            TIME_CONTROL_KEY:cls.__m_timecontrol,
+            DESCRIPTION_KEY:cls.__m_Description
+        }        
+
+    @classmethod
+    #TODO: créer des constantes pour les clés de dictonnaire
+    def deserialize(self, serializedPlayer:dict) -> Self:
+        lastName = serializedPlayer[LAST_NAME_KEY]
+        firstName = serializedPlayer[FIRST_NAME_KEY]
+        birthDay = serializedPlayer[BIRTHDAY_KEY]
+        gender = Gender(serializedPlayer[GENDER_KEY])
+        assessement = serializedPlayer[ASSESSEMENT_KEY]
+        
+        return Player(
+            firstName = firstName,
+            lastName = lastName,
+            birthday = birthDay,
+            gender = gender,
+            assessement = assessement
+        )        

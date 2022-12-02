@@ -2,8 +2,9 @@ from tinydb import *
 from Config.config import *
 from Models.player import *
 from Config.playerConst import *
+from Models.tournament import *
 
-PLAYERS_TABLE = "players"
+PLAYERS_TABLE = "PLAYERS"
 TOURNAMENT_TABLE = "TOURNAMENT"
 
 def savePlayer(playerToSave:Player):
@@ -12,7 +13,16 @@ def savePlayer(playerToSave:Player):
     db = TinyDB(DATABASE_PATH)
     
     # insert serialized player into the database
-    db.table('players').insert(playerToSave.serialize())
+    db.table(PLAYERS_TABLE).insert(playerToSave.serialize())
+
+def saveTournament(tournamentToSave:Tournament):
+
+    # database buffer
+    db = TinyDB(DATABASE_PATH)
+
+    # insert serialized tournament into the database
+    db.table(TOURNAMENT_TABLE).insert(tournamentToSave.serialize())
+
 
 def getPlayers()->list:
 
