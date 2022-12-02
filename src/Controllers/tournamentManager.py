@@ -5,7 +5,6 @@ import Views.appView as AppView
 import Controllers.roundManager as roundManager
 import Controllers.playerManager as playerManager
 import Controllers.dbManager as database
-import os
 
 def createTournament():
 

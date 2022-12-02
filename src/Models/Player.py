@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing_extensions import Self
 from Config.playerConst import * 
+from Config.config import *
 
 class Gender(Enum):
     HOMME = 0
@@ -75,11 +76,11 @@ class Player:
         cls.__m_assessement = assessement
         
     def serialize(cls)->dict:
-        
+
         return {
             LAST_NAME_KEY:cls.__m_lastName,
             FIRST_NAME_KEY:cls.__m_firstName,
-            BIRTHDAY_KEY:str(cls.__m_birthDay),
+            BIRTHDAY_KEY:cls.__m_birthDay.strftime(DATE_FORMAT),
             GENDER_KEY:cls.__m_gender.value,
             SCORE_KEY:cls.__m_score,
             ASSESSEMENT_KEY:cls.__m_assessement

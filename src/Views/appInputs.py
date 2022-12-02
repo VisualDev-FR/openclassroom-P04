@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 from Models.player import *
 from Models.tournament import *
 
@@ -48,7 +48,7 @@ def dateInput(message:str)->datetime:
     while(dateIn == None):
     
         try:
-            dateIn = datetime.strptime(input(message + " : "), "%d/%m/%Y")
+            dateIn = datetime.strptime(input(message + " : "), DATE_FORMAT)
         except KeyboardInterrupt:
             raise ValueError("Sortie de fonction")
         except:
