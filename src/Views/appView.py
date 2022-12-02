@@ -1,11 +1,11 @@
 from Models.round import *
-import os
-import json
+from Models.tournament import *
+import os, sys
 
 def clearConsole():
     os.system('cls')
 
-def printSection(sectionName:str)->None:
+def printSection(sectionName:str):
 
     SECTION_LENGHT = 70
 
@@ -15,7 +15,7 @@ def printSection(sectionName:str)->None:
     print("-" * SECTION_LENGHT)
     print(" ")
 
-def printRound(round:Round)->None:
+def printRound(round:Round):
 
     printSection(("Round {index}".format(index=round.getIndex() + 1).upper()))
 
@@ -34,7 +34,7 @@ def pressAnyKeyToExit():
     print("Appuyez sur Entrée pour revenir au menu principal.")
     input()
 
-def printPlayers(players:list)->None:
+def printPlayers(players:list):
     
     for i in range(len(players)):
 
@@ -45,6 +45,22 @@ def printPlayers(players:list)->None:
         print("    [{index}] : {fullName}".format(index=i, fullName=player.getFullName()))
 
     blankLine()
+
+def printTournaments(tournaments:dict):
+
+    for i in range(len(tournaments)):
+
+        tournament:str = tournaments[i][NAME_KEY]
+        tDate: str = tournaments[i][DATE_KEY]
+
+        print("    [{index}] : Le {date} : {fullName}".format(index=i, fullName=tournament, date=tDate))
+
+    blankLine()
+
+def deleteLines(linesCount:int):
+
+    for i in range(linesCount):
+        print("\033[A" * 2 + " " * 200 + "\033[A")
 
 def blankLine():
     print(" ")

@@ -1,12 +1,10 @@
-from datetime import date, datetime
+from datetime import datetime
 from Models.player import Player
 
 class Round:
     
     __m_matchList:list
     __m_name:str
-    __m_beginDate:datetime
-    __m_endDate:str
     __m_index:int
     
     def __init__(self, index:int) -> None:
@@ -22,12 +20,6 @@ class Round:
 
     def getIndex(cls)->int:
         return cls.__m_index
-
-    def getBeginDate(cls)->datetime:
-        return cls.__m_beginDate
-
-    def getEndDate(cls)->datetime:
-        return cls.__m_endDate
 
     def getName(cls)->str:
         return cls.__m_name

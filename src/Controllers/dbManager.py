@@ -23,11 +23,10 @@ def saveTournament(tournamentToSave:Tournament):
     # insert serialized tournament into the database
     db.table(TOURNAMENT_TABLE).insert(tournamentToSave.serialize())
 
-
 def getPlayers()->list:
 
     # database buffer
-    db = TinyDB(DATABASE_PATH)    
+    db = TinyDB(DATABASE_PATH)
 
     # read players table and sort players by last name
     serializedPlayers = sorted(db.table(PLAYERS_TABLE).all(), key=lambda k: k[LAST_NAME_KEY])
@@ -41,6 +40,9 @@ def getPlayers()->list:
 
     # return array of players
     return players
+
+def getTournaments()->dict:
+    return TinyDB(DATABASE_PATH).table(TOURNAMENT_TABLE).all()    
 
 def updatePlayer(playerToUpdate:Player):
 

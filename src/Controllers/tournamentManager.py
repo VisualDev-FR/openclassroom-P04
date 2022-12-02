@@ -5,7 +5,7 @@ import Views.appView as AppView
 import Controllers.roundManager as roundManager
 import Controllers.playerManager as playerManager
 import Controllers.dbManager as database
-import dbManager
+import json, sys
 
 def createTournament():
 
@@ -20,6 +20,8 @@ def createTournament():
 
     # read all the Players table in the database
     players = database.getPlayers()
+
+    print("playersCOunt = " + str(len(players)))
 
     # display all the players to the user
     AppView.printPlayers(players)
@@ -73,7 +75,7 @@ def createTournament():
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database
-    dbManager.saveTournament(tournament)
+    database.saveTournament(tournament)
 
     # print the current section
     AppView.printSection("FIN")
@@ -154,3 +156,57 @@ def inputTournament()->Tournament:
         timeControl=timeControl, 
         description=description
     )         
+
+def printAlphaSortedPlayers(serializedTOurnament:dict):
+    pass
+
+def printAssessementSortedPlayers(serializedTournamen:dict):
+    pass
+
+def printAllTournamentRounds(serializedTournamen:dict):
+    pass
+
+def printAllTournamentMatch(serializedTournamen:dict):
+    pass
+
+def displayTournaments():
+    # print the current section name
+    AppView.printSection("TOURNOIS")
+
+    # read the database and print all the players
+    tournaments = database.getTournaments()
+    AppView.printTournaments(tournaments)
+
+    # print the end of the section 
+    AppView.printSection(" ")
+
+    # ask the user to display details about players
+    tournamentIndex = input("Séléctionnez un tournoi pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal : ")
+
+    # break if the user press enter key, else print the selected player's details 
+    if tournamentIndex != "":
+
+        selectedTournament:dict = tournaments[int(tournamentIndex)]
+
+        print(selectedTournament[NAME_KEY] + " :")
+
+        print("    [0] : Afficher tous les joueurs par ordre alphabétique")
+        print("    [1] : Afficher tous les joueurs par classement")
+        print("    [2] : Afficher tous les rounds")
+        print("    [3] : Afficher tous les match")
+
+        choiceIndex = input()
+
+        if choiceIndex == 0:
+            printAlphaSortedPlayers(selectedTournament)
+
+        elif choiceIndex == 1:
+            printAssessementSortedPlayers(selectedTournament)
+
+        elif choiceIndex == 2:
+            printAllTournamentRounds(selectedTournament)
+
+        elif choiceIndex == 3:
+            printAllTournamentMatch(selectedTournament)
+
+        AppView.pressAnyKeyToExit()

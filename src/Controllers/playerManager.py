@@ -1,8 +1,8 @@
 import Views.appInputs as AppInput
 import Views.appView as AppView
 import Controllers.dbManager as database
-
 from Models.tournament import *
+import json
 
 def createPlayer():
 
@@ -24,13 +24,25 @@ def displayPlayers():
     AppView.printSection("JOUEURS")
 
     # read the database and print all the players
-    AppView.printPlayers(database.getPlayers())
+    players = database.getPlayers()
+    AppView.printPlayers(players)
 
     # print the end of the section 
     AppView.printSection(" ")
 
-    # display the exit message
-    AppView.pressAnyKeyToExit()
+    # ask the user to display details about players
+    playerIndex = input("Séléctionnez un joueur pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal.")
+
+    # break if the user press enter key, else print the selected player's details 
+    while playerIndex != "":
+
+        try:
+            print(json.dumps(players[int(playerIndex)].serialize(), indent=4))
+            playerIndex = input()
+        except:
+            # catch the wrong inputs
+            print("Veuillez spécifier un nombre entre 0 et " + str(len(players)))
+            playerIndex = input()
 
 def inputPlayer()->Player:
     

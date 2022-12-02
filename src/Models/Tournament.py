@@ -3,6 +3,8 @@ from enum import Enum
 from Models.round import *
 from Models.player import *
 from Config.tournamentConst import *
+from typing_extensions import Self
+
 
 class TimeControl(Enum):
     BULLET = 0
@@ -49,6 +51,12 @@ class Tournament:
     def getPlayers(cls)->int:
         return cls.__m_playersList
 
+    def getDate(cls)->datetime:
+        return cls.__m_date
+
+    def getName(cls)->str:
+        return cls.__m_name
+
     def getSerializedRounds(cls)->dict:
         
         serializedRounds = {}
@@ -78,21 +86,4 @@ class Tournament:
             PLAYERS_KEY:cls.getSerializedPlayers(),
             TIME_CONTROL_KEY:cls.__m_timecontrol,
             DESCRIPTION_KEY:cls.__m_Description
-        }        
-
-    @classmethod
-    #TODO: créer des constantes pour les clés de dictonnaire
-    def deserialize(self, serializedPlayer:dict) -> Self:
-        lastName = serializedPlayer[LAST_NAME_KEY]
-        firstName = serializedPlayer[FIRST_NAME_KEY]
-        birthDay = serializedPlayer[BIRTHDAY_KEY]
-        gender = Gender(serializedPlayer[GENDER_KEY])
-        assessement = serializedPlayer[ASSESSEMENT_KEY]
-        
-        return Player(
-            firstName = firstName,
-            lastName = lastName,
-            birthday = birthDay,
-            gender = gender,
-            assessement = assessement
-        )        
+        }

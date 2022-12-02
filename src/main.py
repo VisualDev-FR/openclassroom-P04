@@ -13,8 +13,8 @@ while runtime :
 
     print("[1] : Créer un nouveau tournoi")
     print("[2] : Créer un nouveau joueur")    
-    print("[3] : Charger un tournoi existant")
-    print("[4] : Modifier le classement d'un joueur")
+    print("[3] : Afficher tout les tournois existant")
+    print("[4] : Afficher tout les joueurs")
     print("[5] : Quitter l'application\n")
 
     AppView.printSection(" ")
@@ -31,7 +31,7 @@ while runtime :
         createPlayer()
 
     elif choice == "3":
-        pass
+        displayTournaments()
 
     elif choice == "4":
         displayPlayers()

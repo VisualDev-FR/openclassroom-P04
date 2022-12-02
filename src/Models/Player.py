@@ -26,7 +26,6 @@ class Player:
         self.__m_assessement = assessement
     
     @classmethod
-    #TODO: créer des constantes pour les clés de dictonnaire
     def deserialize(self, serializedPlayer:dict) -> Self:
         lastName = serializedPlayer[LAST_NAME_KEY]
         firstName = serializedPlayer[FIRST_NAME_KEY]
