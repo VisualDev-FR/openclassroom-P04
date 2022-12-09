@@ -5,7 +5,14 @@ import os
 
 
 def clearConsole():
-    os.system('cls')
+
+    # Run different command, depending on the os
+    if os.name == "nt":
+        # clear console on windows
+        os.system('cls')
+    else:
+        # clear console on macos, linux
+        os.system('clear')
 
 
 def printSection(sectionName: str):
