@@ -72,11 +72,5 @@ def printTournaments(tournaments: dict):
     blankLine()
 
 
-def deleteLines(linesCount: int):
-
-    for i in range(linesCount):
-        print("\033[A" * 2 + " " * 200 + "\033[A")
-
-
 def blankLine():
     print(" ")

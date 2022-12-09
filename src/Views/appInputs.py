@@ -14,7 +14,7 @@ def intInput(message: str) -> int:
             inputValue = int(input(message + " : "))
 
         except KeyboardInterrupt:
-            exit()
+            raise KeyboardInterrupt
         except Exception:
             print("    Erreur dans le format d'entrée. Veuillez renseigner une nombre entier.")
 
@@ -35,7 +35,7 @@ def intInputBetween(minValue: int, maxValue: int, message: str) -> int:
                 inputValue = -1
 
         except KeyboardInterrupt:
-            exit()
+            raise KeyboardInterrupt
         except Exception:
             print("    Erreur dans le format d'entrée. Veuillez renseigner une nombre entier.")
 
@@ -55,7 +55,7 @@ def dateInput(message: str) -> datetime:
         try:
             dateIn = datetime.strptime(input(message + " : "), config.DATE_FORMAT)
         except KeyboardInterrupt:
-            exit()
+            raise KeyboardInterrupt
         except Exception:
             print("    Erreur dans le format de date, veuillez spécifier une date au format jj/mm/aaaa")
 

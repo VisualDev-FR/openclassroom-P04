@@ -18,33 +18,38 @@ while runtime:
 
     AppView.printSection(" ")
 
-    choice = input()
+    try:
 
-    AppView.clearConsole()
+        choice = input()
 
-    if (choice == "1"):
-        # open the tournamentFactory
-        tournamentManager.createTournament()
-
-    elif choice == "2":
-        # open the player factory
-        playerManager.createPlayer()
-
-    elif choice == "3":
-        # display all tournament registered in the database
-        tournamentManager.displayTournaments()
-
-    elif choice == "4":
-        # display all players registered in the database, sorted by name
-        playerManager.displayAlphabeticalSortedPlayers()
-
-    elif choice == "5":
-        # display all players registered in the database, sorted by assessement
-        playerManager.displayAssessementSortedPlayers()
-
-    elif choice == "6":
-        # Clear the console and break the runtime
         AppView.clearConsole()
 
-        # exit the application
-        runtime = False
+        if (choice == "1"):
+            # open the tournamentFactory
+            tournamentManager.createTournament()
+
+        elif choice == "2":
+            # open the player factory
+            playerManager.createPlayer()
+
+        elif choice == "3":
+            # display all tournament registered in the database
+            tournamentManager.displayTournaments()
+
+        elif choice == "4":
+            # display all players registered in the database, sorted by name
+            playerManager.displayAlphabeticalSortedPlayers()
+
+        elif choice == "5":
+            # display all players registered in the database, sorted by assessement
+            playerManager.displayAssessementSortedPlayers()
+
+        elif choice == "6":
+            # Clear the console and break the runtime
+            AppView.clearConsole()
+
+            # exit the application
+            runtime = False
+
+    except KeyboardInterrupt:
+        pass
