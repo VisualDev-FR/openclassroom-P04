@@ -1,35 +1,37 @@
-from tinydb import *
-from Config.config import *
-from Models.player import *
-from Config.playerConst import *
-from Models.tournament import *
+from tinydb import TinyDB, where
+from Config import playerConst, config
+from Models.player import Player
+from Models.tournament import Tournament
 
 PLAYERS_TABLE = "PLAYERS"
 TOURNAMENT_TABLE = "TOURNAMENT"
 
-def savePlayer(playerToSave:Player):
+
+def savePlayer(playerToSave: Player):
 
     # database buffer
-    db = TinyDB(DATABASE_PATH)
-    
+    db = TinyDB(config.DATABASE_PATH)
+
     # insert serialized player into the database
     db.table(PLAYERS_TABLE).insert(playerToSave.serialize())
 
-def saveTournament(tournamentToSave:Tournament):
+
+def saveTournament(tournamentToSave: Tournament):
 
     # database buffer
-    db = TinyDB(DATABASE_PATH)
+    db = TinyDB(config.DATABASE_PATH)
 
     # insert serialized tournament into the database
     db.table(TOURNAMENT_TABLE).insert(tournamentToSave.serialize())
 
-def getPlayers()->list:
+
+def getPlayers() -> list:
 
     # database buffer
-    db = TinyDB(DATABASE_PATH)
+    db = TinyDB(config.DATABASE_PATH)
 
     # read players table and sort players by last name
-    serializedPlayers = sorted(db.table(PLAYERS_TABLE).all(), key=lambda k: k[LAST_NAME_KEY])
+    serializedPlayers = sorted(db.table(PLAYERS_TABLE).all(), key=lambda k: k[playerConst.LAST_NAME_KEY])
 
     # create new array of Players
     players = []
@@ -41,16 +43,20 @@ def getPlayers()->list:
     # return array of players
     return players
 
-def getTournaments()->dict:
-    return TinyDB(DATABASE_PATH).table(TOURNAMENT_TABLE).all()    
 
-def updatePlayer(playerToUpdate:Player):
+def getTournaments() -> dict:
+    return TinyDB(config.DATABASE_PATH).table(TOURNAMENT_TABLE).all()
+
+
+def updatePlayer(playerToUpdate: Player):
 
     # database buffer
-    db = TinyDB(DATABASE_PATH)
+    db = TinyDB(config.DATABASE_PATH)
 
     # remove the player from the database
-    db.table(PLAYERS_TABLE).remove((where(FIRST_NAME_KEY) == playerToUpdate.getFirstName()) & (where(LAST_NAME_KEY) == playerToUpdate.getLastName()))
+    db.table(PLAYERS_TABLE).remove(
+        (where(playerConst.FIRST_NAME_KEY) == playerToUpdate.getFirstName()) &
+        (where(playerConst.LAST_NAME_KEY) == playerToUpdate.getLastName()))
 
     # add the updated player into the database
     db.table(PLAYERS_TABLE).insert(playerToUpdate.serialize())

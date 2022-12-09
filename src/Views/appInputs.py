@@ -1,94 +1,105 @@
 from datetime import datetime
-from Models.player import *
-from Models.tournament import *
+from Models.player import Player, Gender
+from Models.tournament import TimeControl
+from Config import config
 
 
-def intInput(message:str)->int:
+def intInput(message: str) -> int:
 
     inputValue = -1
 
     while inputValue == -1:
 
         try:
-            inputValue = int(input(message + " : ")) 
-        
+            inputValue = int(input(message + " : "))
+
         except KeyboardInterrupt:
             exit()
-        except:
+        except Exception:
             print("    Erreur dans le format d'entrée. Veuillez renseigner une nombre entier.")
 
     return inputValue
 
-def intInputBetween(minValue:int, maxValue:int, message:str)->int:
+
+def intInputBetween(minValue: int, maxValue: int, message: str) -> int:
 
     inputValue = -1
 
     while inputValue == -1:
 
         try:
-            inputValue = int(input("    "  + message + " : "))
-            
-            if not inputValue in range(minValue, maxValue + 1):
+            inputValue = int(input("    " + message + " : "))
+
+            if inputValue not in range(minValue, maxValue + 1):
                 print("    Le nombre spécifié doit être compris entre " + str(minValue) + " et " + str(maxValue))
                 inputValue = -1
 
         except KeyboardInterrupt:
             exit()
-        except:
+        except Exception:
             print("    Erreur dans le format d'entrée. Veuillez renseigner une nombre entier.")
 
     return inputValue
 
-def stringInput(message:str)->str:
+
+def stringInput(message: str) -> str:
     return input(message + " : ").strip()
 
-def dateInput(message:str)->datetime:
-    
-    dateIn:datetime = None
 
-    while(dateIn == None):
-    
+def dateInput(message: str) -> datetime:
+
+    dateIn: datetime = None
+
+    while (dateIn is None):
+
         try:
-            dateIn = datetime.strptime(input(message + " : "), DATE_FORMAT)
+            dateIn = datetime.strptime(input(message + " : "), config.DATE_FORMAT)
         except KeyboardInterrupt:
             exit()
-        except:
+        except Exception:
             print("    Erreur dans le format de date, veuillez spécifier une date au format jj/mm/aaaa")
 
     return dateIn
 
-def genderInput()->Gender:
-    
-    genderIn:Gender = None
 
-    while (genderIn == None):
-        try:            
+def genderInput() -> Gender:
+
+    genderIn: Gender = None
+
+    while (genderIn is None):
+        try:
             genderValue = int(input("    Genre Homme[0] Femme[1] : "))
-            genderIn = Gender(genderValue) 
-        except:
+            genderIn = Gender(genderValue)
+
+        except Exception:
             pass
 
     return genderIn
 
-def timeControlInput()->TimeControl:
-        
-        timeControl:TimeControl = None
 
-        while (timeControl == None):
-            try:            
-                timeControl = int(input("    Format de temps Bullet[0] Blitz[1] Rapid[2]: "))
-                timeControl = timeControl(timeControl) 
-            except:
-                pass
- 
-        return timeControl
+def timeControlInput() -> TimeControl:
 
-def inputWinner(player1:Player, player2:Player)->Player:
+    timeControl: TimeControl = None
 
-    winner:Player = None
+    while (timeControl is None):
+        try:
+            timeControl = int(input("    Format de temps Bullet[0] Blitz[1] Rapid[2]: "))
+            timeControl = timeControl(timeControl)
+        except Exception:
+            pass
 
-    while winner == None:
-        winnerIndex = input("    {p1}[0] vs {p2}[1] : vainqueur = ".format(p1=player1.getFullName(), p2=player2.getFullName()))
+    return timeControl
+
+
+def inputWinner(player1: Player, player2: Player) -> Player:
+
+    winner: Player = None
+
+    while (winner is None):
+        winnerIndex = input(
+            "    {p1}[0] vs {p2}[1] : vainqueur = "
+            .format(p1=player1.getFullName(), p2=player2.getFullName())
+        )
 
         if winnerIndex == "0":
             winner = player1

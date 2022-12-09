@@ -1,19 +1,19 @@
-from Controllers.tournamentManager import  *
-from Controllers.playerManager import *
-from Views.appView import *
+from Controllers import tournamentManager
+from Controllers import playerManager
+from Views import appView as AppView
 
 runtime = True
 
-while runtime :
+while runtime:
 
-    AppView.clearConsole()    
+    AppView.clearConsole()
     AppView.printSection("MENU PRINCIPAL")
 
     print("[1] : Créer un nouveau tournoi")
-    print("[2] : Créer un nouveau joueur") 
+    print("[2] : Créer un nouveau joueur")
     print("[3] : Afficher tous les tournois existant")
     print('[4] : Afficher tous les joueurs par ordre alphabétique')
-    print("[5] : Afficher tous les joueurs par classement")   
+    print("[5] : Afficher tous les joueurs par classement")
     print("[6] : Quitter l'application\n")
 
     AppView.printSection(" ")
@@ -22,25 +22,25 @@ while runtime :
 
     AppView.clearConsole()
 
-    if(choice == "1"):
+    if (choice == "1"):
         # open the tournamentFactory
-        createTournament()
+        tournamentManager.createTournament()
 
     elif choice == "2":
         # open the player factory
-        createPlayer()
+        playerManager.createPlayer()
 
     elif choice == "3":
         # display all tournament registered in the database
-        displayTournaments()
+        tournamentManager.displayTournaments()
 
     elif choice == "4":
         # display all players registered in the database, sorted by name
-        displayAlphabeticalSortedPlayers()
+        playerManager.displayAlphabeticalSortedPlayers()
 
     elif choice == "5":
         # display all players registered in the database, sorted by assessement
-        displayAssessementSortedPlayers()
+        playerManager.displayAssessementSortedPlayers()
 
     elif choice == "6":
         # Clear the console and break the runtime

@@ -1,21 +1,20 @@
-from Models.tournament import *
+from Models.tournament import Tournament, TimeControl
+from Models.player import Player
 import Views.appInputs as AppInput
-import Views.randomInputs as RandInput
 import Views.appView as AppView
 import Controllers.roundManager as roundManager
-import Controllers.playerManager as playerManager
 import Controllers.dbManager as database
-import Config.tournamentConst as tournamentConsts
-import json, sys
+from Config import tournamentConst
+import json
 import typing
 
-def createTournament():
 
+def createTournament():
     # print the current section
     AppView.printSection("DEFINITION DU TOURNOI")
 
     # ask to the user to give the tournaments inputs
-    tournament:Tournament = inputTournament()
+    tournament: Tournament = inputTournament()
 
     # print the current section
     AppView.printSection("CHOIX DES JOUEURS")
@@ -34,7 +33,7 @@ def createTournament():
         # ask to the user to select a player in the displayed list
         playerIndex = AppInput.intInputBetween(0, len(players) - 1, "Joueur " + str(i))
 
-        print("    -> {fullName}\n".format(fullName = players[playerIndex].getFullName()))
+        print("    -> {fullName}\n".format(fullName=players[playerIndex].getFullName()))
 
         # add that player to the tournament
         tournament.addPlayer(players[playerIndex])
@@ -45,24 +44,24 @@ def createTournament():
     # next rounds generation
     for i in range(tournament.getRoundsCount()):
 
-        # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne' 
+        # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne'
         AppView.printRound(nextRound)
 
-        # parsing of the round results    
+        # parsing of the round results
         for match in nextRound.getMatchs():
 
-            player1:Player = match[0][0]
-            player2:Player = match[1][0]
+            player1: Player = match[0][0]
+            player2: Player = match[1][0]
 
             # ask to the user, the results of the match n
-            winner:Player = AppInput.inputWinner(player1, player2)
+            winner: Player = AppInput.inputWinner(player1, player2)
             winner.increaseScore()
-        
+
         print(" ")
 
         # generate one round, given the tournament state
         nextRound = roundManager.generateRound(tournament, i)
-        tournament.addRound(nextRound)        
+        tournament.addRound(nextRound)
 
     # print the current section
     AppView.printSection("RESULTATS")
@@ -70,7 +69,6 @@ def createTournament():
     for player in tournament.getScoreSortedPlayers():
         print("    " + player.getFullName() + " " + str(player.getScore()) + " " + str(player.getAssessement()))
 
-    
     AppView.printSection("MISE A JOUR DES CLASSEMENTS")
 
     # print all the player scores
@@ -79,15 +77,15 @@ def createTournament():
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database
-    #database.saveTournament(tournament) #TODO: ré-activer la sauvegarde du tournoi que l'on vient de créer
+    # database.saveTournament(tournament) #TODO: ré-activer la sauvegarde du tournoi que l'on vient de créer
 
     # print the current section
     AppView.printSection("FIN")
     AppView.pressAnyKeyToExit()
 
 
-def inputTournament()->Tournament:
-    
+def inputTournament() -> Tournament:
+
     # ask all necessary data to create one Tournament instance
     roundsCount = AppInput.intInput("    Nombre de tours")
     playersCount = 8
@@ -100,16 +98,17 @@ def inputTournament()->Tournament:
     AppView.blankLine()
 
     return Tournament(
-        roundsCount=roundsCount, 
-        playersCount=playersCount, 
-        name=name, 
-        location=location, 
-        date=tDate, 
-        timeControl=timeControl, 
+        roundsCount=roundsCount,
+        playersCount=playersCount,
+        name=name,
+        location=location,
+        date=tDate,
+        timeControl=timeControl,
         description=description
-    )         
+    )
 
-def printAlphaSortedPlayers(serializedTournament:dict):
+
+def printAlphaSortedPlayers(serializedTournament: dict):
 
     # deserialize all the players registered in the tournament
     deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
@@ -121,7 +120,8 @@ def printAlphaSortedPlayers(serializedTournament:dict):
     AppView.printSection('JOUEURS')
     AppView.printPlayers(sortedPlayers)
 
-def printAssessementSortedPlayers(serializedTournament:dict):
+
+def printAssessementSortedPlayers(serializedTournament: dict):
     # deserialize all the players registered in the tournament
     deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
 
@@ -132,17 +132,19 @@ def printAssessementSortedPlayers(serializedTournament:dict):
     AppView.printSection('JOUEURS')
     AppView.printPlayers(sortedPlayers)
 
-def printAllTournamentRounds(serializedTournament:dict):
 
-    serializedRounds: dict = serializedTournament[tournamentConsts.ROUNDS_KEY]
+def printAllTournamentRounds(serializedTournament: dict):
+
+    serializedRounds: dict = serializedTournament[tournamentConst.ROUNDS_KEY]
 
     AppView.printSection('ROUNDS')
 
     print(json.dumps(serializedRounds, indent=4))
 
-def printAllTournamentMatch(serializedTournament:dict):
-    
-    serializedRounds: dict = serializedTournament[tournamentConsts.ROUNDS_KEY]
+
+def printAllTournamentMatch(serializedTournament: dict):
+
+    serializedRounds: dict = serializedTournament[tournamentConst.ROUNDS_KEY]
 
     AppView.printSection('MATCH')
 
@@ -154,13 +156,15 @@ def printAllTournamentMatch(serializedTournament:dict):
             matchIndex += 1
     print(" ")
 
-def getPlayersFromSerializedTournament(serializedTournament:dict)->typing.List[Player]:
+
+def getPlayersFromSerializedTournament(serializedTournament: dict) -> typing.List[Player]:
 
     # get the dictionnary of all player registered in the tournament
-    serializedPlayers:dict = serializedTournament[tournamentConsts.PLAYERS_KEY]
+    serializedPlayers: dict = serializedTournament[tournamentConst.PLAYERS_KEY]
 
     # return a list containing all deserialized player instances
     return [Player.deserialize(serializedPlayer) for serializedPlayer in serializedPlayers.values()]
+
 
 def displayTournaments():
     # print the current section name
@@ -170,23 +174,39 @@ def displayTournaments():
     tournaments = database.getTournaments()
     AppView.printTournaments(tournaments)
 
-    # print the end of the section 
+    # print the end of the section
     AppView.printSection(" ")
 
     # ask the user to display details about players
-    tournamentIndex = input("Séléctionnez un tournoi pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal : ")
+    tournamentIndex = input("Séléctionnez un tournoi pour afficher ses détails, ou appuyez sur entrée \
+        pour revenir au menu principal : ")
 
-    # break if the user press enter key, else print the selected player's details 
+    # break if the user press enter key, else print the selected player's details
     if tournamentIndex != "":
 
-        selectedTournament:dict = tournaments[int(tournamentIndex)]
+        selectedTournament: dict = tournaments[int(tournamentIndex)]
 
-        print(selectedTournament[NAME_KEY] + " : \n")
-        print("    " + PLAYERS_COUNT_KEY + " : " + str(selectedTournament[PLAYERS_COUNT_KEY]))
-        print("    " + LOCATION_KEY + " : " + selectedTournament[LOCATION_KEY])
-        print("    " + ROUNDS_COUNT_KEY + " : " + str(selectedTournament[ROUNDS_COUNT_KEY]))
-        print("    " + TIME_CONTROL_KEY + " : " + TimeControl(selectedTournament[TIME_CONTROL_KEY]).name)
-        print("    " + DESCRIPTION_KEY + " : " + selectedTournament[DESCRIPTION_KEY])
+        print(selectedTournament[tournamentConst.NAME_KEY] + " : \n")
+        print(
+            "    " +
+            tournamentConst.PLAYERS_COUNT_KEY + " : " +
+            str(selectedTournament[tournamentConst.PLAYERS_COUNT_KEY]))
+
+        print(
+            "    " +
+            tournamentConst.LOCATION_KEY + " : " +
+            selectedTournament[tournamentConst.LOCATION_KEY])
+        print(
+            "    " +
+            tournamentConst.ROUNDS_COUNT_KEY + " : " +
+            str(selectedTournament[tournamentConst.ROUNDS_COUNT_KEY]))
+
+        print(
+            "    " +
+            tournamentConst.TIME_CONTROL_KEY + " : " +
+            TimeControl(selectedTournament[tournamentConst.TIME_CONTROL_KEY]).name)
+
+        print("    " + tournamentConst.DESCRIPTION_KEY + " : " + selectedTournament[tournamentConst.DESCRIPTION_KEY])
         print(" ")
 
         print("    [0] : Afficher tous les joueurs par ordre alphabétique")

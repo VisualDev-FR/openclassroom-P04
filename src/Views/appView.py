@@ -1,11 +1,13 @@
-from Models.round import *
-from Models.tournament import *
-import os, sys
+from Models.round import Round
+from Models.player import Player, playerConst
+import os
+
 
 def clearConsole():
     os.system('cls')
 
-def printSection(sectionName:str):
+
+def printSection(sectionName: str):
 
     SECTION_LENGHT = 70
 
@@ -15,52 +17,58 @@ def printSection(sectionName:str):
     print("-" * SECTION_LENGHT)
     print(" ")
 
-def printRound(round:Round):
+
+def printRound(round: Round):
 
     printSection(("Round {index}".format(index=round.getIndex() + 1).upper()))
 
-    roundMatchs:list = round.getMatchs()
+    roundMatchs: list = round.getMatchs()
 
     for i in range(len(roundMatchs)):
 
-        player1:Player = roundMatchs[i][0][0]
-        player2:Player = roundMatchs[i][1][0]
+        player1: Player = roundMatchs[i][0][0]
+        player2: Player = roundMatchs[i][1][0]
 
         print("    Match {index} : {p1} vs {p2}".format(index=i, p1=player1.getFullName(), p2=player2.getFullName()))
 
     print(" ")
 
+
 def pressAnyKeyToExit():
     print("Appuyez sur Entrée pour revenir au menu principal.")
     input()
 
-def printPlayers(players:list):
-    
+
+def printPlayers(players: list):
+
     for i in range(len(players)):
 
         # cast player to make coding easier
-        player:Player = players[i]
+        player: Player = players[i]
 
         # print the player
         print("    [{index}] : {fullName}".format(index=i, fullName=player.getFullName()))
 
     blankLine()
 
-def printTournaments(tournaments:dict):
+
+def printTournaments(tournaments: dict):
 
     for i in range(len(tournaments)):
 
-        tournament:str = tournaments[i][NAME_KEY]
-        tDate: str = tournaments[i][DATE_KEY]
+        tournament: str = tournaments[i][playerConst.NAME_KEY]
+        tDate: str = tournaments[i][playerConst.DATE_KEY]
 
         print("    [{index}] : Le {date} : {fullName}".format(index=i, fullName=tournament, date=tDate))
 
     blankLine()
 
-def deleteLines(linesCount:int):
+
+def deleteLines(linesCount: int):
 
     for i in range(linesCount):
         print("\033[A" * 2 + " " * 200 + "\033[A")
+
 
 def blankLine():
     print(" ")
