@@ -1,4 +1,3 @@
 ignore/
 env/
 *.pyc
-flake-report/
