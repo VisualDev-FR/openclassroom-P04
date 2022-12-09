@@ -1,2 +1,5 @@
-DATABASE_PATH = "C:\\Users\\menan\\Desktop\\OpenClassrooms\\P04\\openclassroom-P04\\Ressource\\db.json"
+from pathlib import Path
+import os
+
+DATABASE_PATH = os.path.join(Path(__file__).parents[2], "db.json")
 DATE_FORMAT = "%d/%m/%Y"
