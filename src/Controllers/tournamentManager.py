@@ -39,15 +39,12 @@ def createTournament():
         # add that player to the tournament
         tournament.addPlayer(players[playerIndex])
 
-    #TODO:generation des pairs du 1er tour
+    # we generate the first round, based on the players assessements
+    nextRound = roundManager.generateFirstRound(tournament)
 
-    # rounds generation
+    # next rounds generation
     for i in range(tournament.getRoundsCount()):
-        
-        # generate one round, given the tournament state
-        nextRound = roundManager.generateRound(tournament, i)
-        tournament.addRound(nextRound)
-        
+
         # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne' 
         AppView.printRound(nextRound)
 
@@ -63,21 +60,26 @@ def createTournament():
         
         print(" ")
 
+        # generate one round, given the tournament state
+        nextRound = roundManager.generateRound(tournament, i)
+        tournament.addRound(nextRound)        
+
     # print the current section
     AppView.printSection("RESULTATS")
 
-    for player in roundManager.getScoreSortedPlayers(tournament):
-        print("    " + player.getFullName() + " " + str(player.getScore()))
+    for player in tournament.getScoreSortedPlayers():
+        print("    " + player.getFullName() + " " + str(player.getScore()) + " " + str(player.getAssessement()))
 
-    # print the current section
+    
     AppView.printSection("MISE A JOUR DES CLASSEMENTS")
 
-    for player in roundManager.getNameSortedPlayers(tournament):
+    # print all the player scores
+    for player in tournament.getScoreSortedPlayers():
         player.setAssessement(AppInput.intInput(player.getFullName()))
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database
-    database.saveTournament(tournament)
+    #database.saveTournament(tournament) #TODO: ré-activer la sauvegarde du tournoi que l'on vient de créer
 
     # print the current section
     AppView.printSection("FIN")

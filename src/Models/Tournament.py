@@ -4,6 +4,7 @@ from Models.round import *
 from Models.player import *
 from Config.tournamentConst import *
 from typing_extensions import Self
+import typing
 
 class TimeControl(Enum):
     BULLET = 0
@@ -87,3 +88,12 @@ class Tournament:
             TIME_CONTROL_KEY:cls.__m_timecontrol,
             DESCRIPTION_KEY:cls.__m_Description
         }
+
+    def getAssessementSortedPlayers(cls)->typing.List[Player]:
+        return  sorted(cls.__m_playersList, key=lambda player: player.getAssessement())
+
+    def getScoreSortedPlayers(cls)->typing.List[Player]:
+            return  sorted(cls.__m_playersList, key=lambda player: (player.getScore(), -player.getAssessement()), reverse=True)
+
+    def getNameSortedPlayers(cls)->typing.List[Player]:
+            return  sorted(cls.__m_playersList, key=lambda player: player.getLastName())        

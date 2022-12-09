@@ -1,9 +1,25 @@
 from Models.tournament import Tournament
 from Models.round import Round
+from Models.player import Player
+from typing import *
+
+def generateFirstRound(tournament:Tournament)->Round:
+    
+    sortedPlayers:List[Player] = tournament.getAssessementSortedPlayers()
+    newRound = Round(0)
+
+    for i in range(int(len(sortedPlayers) / 2)):
+
+        player1 = sortedPlayers[i]
+        player2 = sortedPlayers[i + int(len(sortedPlayers) / 2)]
+
+        newRound.addMatch(player1, player2)    
+    
+    return newRound
 
 def generateRound(tournament:Tournament, roundIndex:int)->Round:
     
-    sortedPlayers:list = getScoreSortedPlayers(tournament)
+    sortedPlayers:List[Player] = tournament.getScoreSortedPlayers()
     newRound = Round(roundIndex)
 
     for i in range(int(len(sortedPlayers) / 2)):
@@ -14,9 +30,3 @@ def generateRound(tournament:Tournament, roundIndex:int)->Round:
         newRound.addMatch(player1, player2)
 
     return newRound
-
-def getScoreSortedPlayers(tournament:Tournament)->list:
-        return  sorted(tournament.getPlayers(), key=lambda player: player.getScore(), reverse=True)
-
-def getNameSortedPlayers(tournament:Tournament)->list:
-        return  sorted(tournament.getPlayers(), key=lambda player: player.getLastName())
