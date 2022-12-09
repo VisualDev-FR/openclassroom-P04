@@ -1,24 +1,21 @@
-# Application gérant un tournoi d'échecs
+# Openclassroom P04 - Developpez un programme logiciel en python
 
-## Openclassroom P04
+Cette application a pour but de gérer des tournois d'échecs, en s'appuyant une base donnée (format json) de joueurs et de tournois gérée dynamiquement.
 
-Projet consistant à créer une application permettant de créer la structure d'un tournoi d'échecs, permettant d'ajouter des joueurs dans une base de données. Le programme utilise un algorithme permettant de calculer la rotation des joueurs afin que les matchs soit équitables et ne se reproduisent pas (algorithme suisse de tournois).
+Le programme permet :
 
-Le programme utilise le design pattern MVC (Modèles - Vues - Controlleurs), et utilise la librairie TinyDB pour sauvegarder les joueurs et les tournois.
+- de créer et sauvegarder des joueurs dans la base de données.
+- de créer et sauvegarder des tournois dans la base de données.
+- d'afficher les joueurs enregistrés par classement / par ordre alphabétique.
+- d'afficher les tournois enregistrés dans la base données.
 
-Il permet de :
-
-- Créer et sauvegarder des joueurs.
-- Mettre à jour le classement d'un joueur.
-- Créer et sauvegarder des tournois.
-- Lancer des tournois.
-- Arrêter un tournoi en cours et le reprendre plus tard.
+Une base de donnée ```db.json``` contenant 16 joueurs et 1 tournoi, est à disposition dans le dépôt pour permettre d'effectuer des tests.
 
 ## Configuration de l'environnement virtuel :
 
 Le programme utilise plusieurs librairies externes, et modules de Python, qui sont repertoriés dans le fichier ```requirements.txt```
 
-Commencez par ouvrir un terminal à la racine du projet 
+Pour configuer l'environnement, commencez par ouvrir un terminal à la racine du projet.
 
 Créez un environnement virtuel à partir de la commande suivante : 
 ```bash
@@ -29,6 +26,13 @@ Installez les packages python spécifiés dans le fichier ```requirement.txt``` 
 ```bash
 pip install -r requirement.txt
 ```
+
+activez l'environnement virtuel que vous venez de créer avec la commande suivante :
+
+```bash
+env/Scripts/activate
+```
+
 
 ## Démarrage 
 
