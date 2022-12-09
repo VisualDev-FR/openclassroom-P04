@@ -5,7 +5,9 @@ import Views.appView as AppView
 import Controllers.roundManager as roundManager
 import Controllers.playerManager as playerManager
 import Controllers.dbManager as database
+import Config.tournamentConst as tournamentConsts
 import json, sys
+import typing
 
 def createTournament():
 
@@ -157,23 +159,50 @@ def inputTournament()->Tournament:
         description=description
     )         
 
-def printAlphaSortedPlayers(serializedTOurnament:dict):
+def printAlphaSortedPlayers(serializedTournament:dict):
+
+    # deserialize all the players registered in the tournament
+    deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
+
+    # sort all the players by name
+    sortedPlayers = sorted(deserializedPlayers, key=lambda player: player.getFullName(reverse=True))
+
+    # print all the player we just sorted
+    AppView.printSection('JOUEURS')
+    AppView.printPlayers(sortedPlayers)
+
+def printAssessementSortedPlayers(serializedTournament:dict):
+    # deserialize all the players registered in the tournament
+    deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
+
+    # sort all the players by name
+    sortedPlayers = sorted(deserializedPlayers, key=lambda player: player.getAssessement())
+
+    # print all the player we just sorted
+    AppView.printSection('JOUEURS')
+    AppView.printPlayers(sortedPlayers)
+
+def printAllTournamentRounds(serializedTournament:dict):
     pass
 
-def printAssessementSortedPlayers(serializedTournamen:dict):
+def printAllTournamentMatch(serializedTournament:dict):
     pass
 
-def printAllTournamentRounds(serializedTournamen:dict):
-    pass
+def getPlayersFromSerializedTournament(serializedTournament:dict)->typing.List[Player]:
 
-def printAllTournamentMatch(serializedTournamen:dict):
-    pass
+    # get the dictionnary of all player registered in the tournament
+    serializedPlayers:dict = serializedTournament[tournamentConsts.PLAYERS_KEY]
+
+    # return a list containing all deserialized player instances
+    return [Player.deserialize(serializedPlayer) for serializedPlayer in serializedPlayers.values()]
+
+
 
 def displayTournaments():
     # print the current section name
     AppView.printSection("TOURNOIS")
 
-    # read the database and print all the players
+    # read the database and print all the tournaments registered in the database
     tournaments = database.getTournaments()
     AppView.printTournaments(tournaments)
 
@@ -195,7 +224,7 @@ def displayTournaments():
         print("    [2] : Afficher tous les rounds")
         print("    [3] : Afficher tous les match")
 
-        choiceIndex = input()
+        choiceIndex = AppInput.intInputBetween(0, 3, "\nAction")
 
         if choiceIndex == 0:
             printAlphaSortedPlayers(selectedTournament)
@@ -209,4 +238,4 @@ def displayTournaments():
         elif choiceIndex == 3:
             printAllTournamentMatch(selectedTournament)
 
-        AppView.pressAnyKeyToExit()
+        choiceIndex = input('Appuyez sur entrée pour revenir au menu principal.')

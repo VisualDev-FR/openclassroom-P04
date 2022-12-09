@@ -50,8 +50,11 @@ class Player:
     def getScore(cls)->int:
         return cls.__m_score
     
-    def getFullName(cls)->str:
-        return "{firstName} {lastName}".format(firstName = cls.__m_firstName, lastName=cls.__m_lastName)
+    def getFullName(cls, reverse: bool = True)->str:
+        if reverse:
+            return "{lastName} {firstName}".format(firstName = cls.__m_firstName, lastName=cls.__m_lastName)
+        else:
+            return "{firstName} {lastName}".format(firstName = cls.__m_firstName, lastName=cls.__m_lastName)
     
     def getFirstName(cls)->str:
         return cls.__m_firstName    

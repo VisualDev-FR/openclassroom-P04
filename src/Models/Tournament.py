@@ -5,7 +5,6 @@ from Models.player import *
 from Config.tournamentConst import *
 from typing_extensions import Self
 
-
 class TimeControl(Enum):
     BULLET = 0
     BLITZ = 1

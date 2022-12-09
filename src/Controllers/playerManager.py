@@ -18,31 +18,45 @@ def createPlayer():
     # diplsay the exit message
     AppView.pressAnyKeyToExit()
 
-def displayPlayers():
+def displayPlayers(players):
 
     # print the current section name
     AppView.printSection("JOUEURS")
 
-    # read the database and print all the players
-    players = database.getPlayers()
+    # print all players
     AppView.printPlayers(players)
 
     # print the end of the section 
     AppView.printSection(" ")
 
     # ask the user to display details about players
-    playerIndex = input("Séléctionnez un joueur pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal.")
+    playerIndex = input("Séléctionnez un joueur pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal : ")
 
     # break if the user press enter key, else print the selected player's details 
     while playerIndex != "":
 
         try:
             print(json.dumps(players[int(playerIndex)].serialize(), indent=4))
-            playerIndex = input()
+            playerIndex = input("Séléctionnez un joueur pour afficher ses détails, ou appuyez sur entrée pour revenir au menu principal : ")
         except:
             # catch the wrong inputs
-            print("Veuillez spécifier un nombre entre 0 et " + str(len(players)))
-            playerIndex = input()
+            playerIndex = input("Veuillez spécifier un nombre entre 0 et " + str(len(players)))
+
+def displayAlphabeticalSortedPlayers():
+
+    # read the database
+    players = sorted(database.getPlayers(), key=lambda player: player.getFullName(reverse=True))
+
+    # Display the sorted players
+    displayPlayers(players)
+
+def displayAssessementSortedPlayers():
+    # read the database
+    players = sorted(database.getPlayers(), key=lambda player: player.getAssessement())
+
+    # Display the sorted players
+    displayPlayers(players)    
+     
 
 def inputPlayer()->Player:
     
