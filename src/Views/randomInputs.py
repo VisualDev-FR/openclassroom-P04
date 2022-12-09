@@ -27,7 +27,7 @@ def randomPlayer(playerIndex:int, maxPlayers:int)->Player:
 def randomTournament()->Tournament: 
 
     roundsCount = random.choice([4 ,5 ,6, 7, 8])
-    playersCount = random.choice([4 ,6 ,8, 10, 12])
+    playersCount = 8
     name = random.choice(["Tournoi amical du club d'échec de Vitrolles", "Championnats de France d'echecs"])
     location = random.choice(["Vitrolles", "Paris", "Marseille", "Lyon", "Strasbourg", "Bourg-en-Bresse", "Dunkerque"])
     tDate = random.choice(["18/11/2019", "18/11/2020", "18/11/2021", "18/11/2022"])

@@ -79,6 +79,7 @@ class Tournament:
         return {
             NAME_KEY:cls.__m_name,
             LOCATION_KEY:cls.__m_location,
+            PLAYERS_COUNT_KEY: cls.__m_playersCount,
             DATE_KEY:cls.__m_date.strftime(DATE_FORMAT),
             ROUNDS_COUNT_KEY:cls.__m_roundsCount,
             ROUNDS_KEY:cls.getSerializedRounds(),
