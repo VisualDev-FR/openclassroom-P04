@@ -1,5 +1,6 @@
 from Models.round import Round
-from Models.player import Player, playerConst
+from Models.player import Player
+from Models.tournament import tournamentConst
 import os
 
 
@@ -56,8 +57,8 @@ def printTournaments(tournaments: dict):
 
     for i in range(len(tournaments)):
 
-        tournament: str = tournaments[i][playerConst.NAME_KEY]
-        tDate: str = tournaments[i][playerConst.DATE_KEY]
+        tournament: str = tournaments[i][tournamentConst.NAME_KEY]
+        tDate: str = tournaments[i][tournamentConst.DATE_KEY]
 
         print("    [{index}] : Le {date} : {fullName}".format(index=i, fullName=tournament, date=tDate))
 

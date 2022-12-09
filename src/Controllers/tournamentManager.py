@@ -178,8 +178,10 @@ def displayTournaments():
     AppView.printSection(" ")
 
     # ask the user to display details about players
-    tournamentIndex = input("Séléctionnez un tournoi pour afficher ses détails, ou appuyez sur entrée \
-        pour revenir au menu principal : ")
+    tournamentIndex = input(
+        "Séléctionnez un tournoi pour afficher ses détails, ou appuyez sur entrée " +
+        "pour revenir au menu principal : "
+    )
 
     # break if the user press enter key, else print the selected player's details
     if tournamentIndex != "":

@@ -33,8 +33,8 @@ def displayPlayers(players):
 
     # ask the user to display details about players
     playerIndex = input(
-        "Séléctionnez un joueur pour afficher ses détails, \
-        ou appuyez sur entrée pour revenir au menu principal : ")
+        "Séléctionnez un joueur pour afficher ses détails, " +
+        "ou appuyez sur entrée pour revenir au menu principal : ")
 
     # break if the user press enter key, else print the selected player's details
     while playerIndex != "":
@@ -42,8 +42,8 @@ def displayPlayers(players):
         try:
             print(json.dumps(players[int(playerIndex)].serialize(), indent=4))
             playerIndex = input(
-                "Séléctionnez un joueur pour afficher ses détails, \
-                ou appuyez sur entrée pour revenir au menu principal : ")
+                "Séléctionnez un joueur pour afficher ses détails, " +
+                "ou appuyez sur entrée pour revenir au menu principal : ")
         except Exception:
             # catch the wrong inputs
             playerIndex = input("Veuillez spécifier un nombre entre 0 et " + str(len(players)))
