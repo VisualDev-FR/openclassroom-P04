@@ -44,7 +44,9 @@ python /src/main.py
 
 ## Rapport flake8
 
-Le dépôt contient un rapport flake8, qui n'affiche aucune erreur. Il est possible d'en générer un nouveau en installant le module ```flake8``` et en entrant dans le terminal :
+Le dépôt contient un rapport flake8, qui n'affiche aucune violation des règles PEP8. 
+
+Il est possible d'en générer un nouveau en activant l'environnement virtuel (voir procédure ci-dessus) et en entrant la commande suivante dans le terminal :
 
 ```bash
 flake8 .\src\ --format=html --htmldir=flake-report

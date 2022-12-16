@@ -22,8 +22,6 @@ def createTournament():
     # read all the Players table in the database
     players = database.getPlayers()
 
-    print("playersCOunt = " + str(len(players)))
-
     # display all the players to the user
     AppView.printPlayers(players)
 
@@ -57,11 +55,16 @@ def createTournament():
             winner: Player = AppInput.inputWinner(player1, player2)
             winner.increaseScore()
 
-        print(" ")
+        # set the hour of the end of the round, once all winners have been designated
+        nextRound.end()
 
         # generate one round, given the tournament state
+        AppView.blankLine()
         nextRound = roundManager.generateRound(tournament, i)
         tournament.addRound(nextRound)
+
+    # end the last round
+    nextRound.end()
 
     # print the current section
     AppView.printSection("RESULTATS")
@@ -77,7 +80,7 @@ def createTournament():
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database
-    # database.saveTournament(tournament) #TODO: ré-activer la sauvegarde du tournoi que l'on vient de créer
+    database.saveTournament(tournament)
 
     # print the current section
     AppView.printSection("FIN")
@@ -87,13 +90,13 @@ def createTournament():
 def inputTournament() -> Tournament:
 
     # ask all necessary data to create one Tournament instance
-    roundsCount = AppInput.intInput("    Nombre de tours")
+    roundsCount = AppInput.intInput("Nombre de tours")
     playersCount = 8
-    name = AppInput.stringInput("    Nom du trournoi")
-    location = AppInput.stringInput("    Lieu du tournoi")
-    tDate = AppInput.dateInput("    Date du tournoi")
+    name = AppInput.stringInput("Nom du trournoi")
+    location = AppInput.stringInput("Lieu du tournoi")
+    tDate = AppInput.dateInput("Date du tournoi")
     timeControl = AppInput.timeControlInput()
-    description = AppInput.stringInput("    Descritpion")
+    description = AppInput.stringInput("Descritpion")
 
     AppView.blankLine()
 

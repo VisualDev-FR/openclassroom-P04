@@ -1,5 +1,4 @@
-from Controllers import tournamentManager
-from Controllers import playerManager
+from Controllers import tournamentManager, playerManager, dbManager
 from Views import appView as AppView
 
 runtime = True
@@ -50,6 +49,9 @@ while runtime:
 
             # exit the application
             runtime = False
+
+        elif choice == "7":
+            dbManager.prettifyDatabase()
 
     except KeyboardInterrupt:
         pass

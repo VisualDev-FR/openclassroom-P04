@@ -2,6 +2,8 @@ from tinydb import TinyDB, where
 from Config import playerConst, config
 from Models.player import Player
 from Models.tournament import Tournament
+from Views import appView
+import json
 
 PLAYERS_TABLE = "PLAYERS"
 TOURNAMENT_TABLE = "TOURNAMENT"
@@ -60,3 +62,12 @@ def updatePlayer(playerToUpdate: Player):
 
     # add the updated player into the database
     db.table(PLAYERS_TABLE).insert(playerToUpdate.serialize())
+
+
+def prettifyDatabase():
+
+    db = TinyDB(config.DATABASE_PATH).table(TOURNAMENT_TABLE).all()
+
+    print(json.dumps(db, indent=4))
+
+    appView.pressAnyKeyToExit()

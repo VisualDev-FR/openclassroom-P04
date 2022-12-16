@@ -14,7 +14,7 @@ class TimeControl(Enum):
 
 class Tournament:
 
-    __m_roundsList: list            # List of all tournament's rounds
+    __m_roundsList: typing.List[Round]            # List of all tournament's rounds
     __m_playersList: list           # List of the tournament's players
 
     __m_roundsCount: int            # Number of rounds played in the tournament
