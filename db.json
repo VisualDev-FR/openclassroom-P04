@@ -1,1 +1,229 @@
-{"PLAYERS": {"2": {"NOM": "Macron", "PRENOM": "Emmanuel", "DATE_DE_NAISSANCE": "21/12/1977", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 78}, "3": {"NOM": "Mathurin", "PRENOM": "Alix", "DATE_DE_NAISSANCE": "28/12/1977", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 1}, "5": {"NOM": "Trump", "PRENOM": "Donald", "DATE_DE_NAISSANCE": "14/06/1946", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 1589}, "9": {"NOM": "Pouyann\u00e9", "PRENOM": "Patrick", "DATE_DE_NAISSANCE": "24/06/1963", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 94}, "10": {"NOM": "Musk", "PRENOM": "Elon", "DATE_DE_NAISSANCE": "28/06/1971", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 31}, "11": {"NOM": "P\u00e9cresse", "PRENOM": "Val\u00e9rie", "DATE_DE_NAISSANCE": "14/07/1967", "GENRE": "FEMME", "SCORE": 0, "CLASSEMENT": 67}, "13": {"NOM": "Tyson", "PRENOM": "Mike", "DATE_DE_NAISSANCE": "30/06/1966", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 42}, "16": {"NOM": "Nebra", "PRENOM": "Matthieu", "DATE_DE_NAISSANCE": "05/08/1985", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 18}, "25": {"NOM": "Carlsen", "PRENOM": "Magnus", "DATE_DE_NAISSANCE": "30/11/1990", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 1}, "26": {"NOM": "Einstein", "PRENOM": "Albert", "DATE_DE_NAISSANCE": "14/03/1879", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 2}, "27": {"NOM": "Kasparov", "PRENOM": "Garry", "DATE_DE_NAISSANCE": "13/04/1963", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 3}, "28": {"NOM": "Gardin", "PRENOM": "Blanche", "DATE_DE_NAISSANCE": "03/04/1977", "GENRE": "FEMME", "SCORE": 2, "CLASSEMENT": 4}, "29": {"NOM": "Clooney", "PRENOM": "George", "DATE_DE_NAISSANCE": "06/05/1961", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 5}, "30": {"NOM": "Franklin", "PRENOM": "Aretha", "DATE_DE_NAISSANCE": "25/03/1942", "GENRE": "FEMME", "SCORE": 0, "CLASSEMENT": 6}, "31": {"NOM": "Dujardin", "PRENOM": "Jean", "DATE_DE_NAISSANCE": "19/06/1972", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 7}, "32": {"NOM": "Elmaleh", "PRENOM": "Gad", "DATE_DE_NAISSANCE": "19/04/1971", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 8}}, "TOURNAMENT": {"1": {"NOM": "Championnat de France", "NOMBRE_DE_JOUEURS": 8, "LIEU": "Paris", "DATE": "09/12/2022", "NOMBRE_DE_TOURS": 3, "ROUNDS": {"Round 0": {"Match 0": "Carlsen Magnus vs Elmaleh Gad", "Match 1": "Clooney George vs Franklin Aretha", "Match 2": "Dujardin Jean vs Gardin Blanche", "Match 3": "Einstein Albert vs Kasparov Garry"}, "Round 1": {"Match 0": "Clooney George vs Carlsen Magnus", "Match 1": "Elmaleh Gad vs Dujardin Jean", "Match 2": "Gardin Blanche vs Einstein Albert", "Match 3": "Kasparov Garry vs Franklin Aretha"}, "Round 2": {"Match 0": "Clooney George vs Gardin Blanche", "Match 1": "Elmaleh Gad vs Carlsen Magnus", "Match 2": "Kasparov Garry vs Dujardin Jean", "Match 3": "Einstein Albert vs Franklin Aretha"}}, "JOUEURS": {"Carlsen Magnus": {"NOM": "Carlsen", "PRENOM": "Magnus", "DATE_DE_NAISSANCE": "30/11/1990", "GENRE": "HOMME", "SCORE": 1, "CLASSEMENT": 1}, "Clooney George": {"NOM": "Clooney", "PRENOM": "George", "DATE_DE_NAISSANCE": "06/05/1961", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 3}, "Dujardin Jean": {"NOM": "Dujardin", "PRENOM": "Jean", "DATE_DE_NAISSANCE": "19/06/1972", "GENRE": "HOMME", "SCORE": 0, "CLASSEMENT": 5}, "Einstein Albert": {"NOM": "Einstein", "PRENOM": "Albert", "DATE_DE_NAISSANCE": "14/03/1879", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 2}, "Elmaleh Gad": {"NOM": "Elmaleh", "PRENOM": "Gad", "DATE_DE_NAISSANCE": "19/04/1971", "GENRE": "HOMME", "SCORE": 2, "CLASSEMENT": 10}, "Franklin Aretha": {"NOM": "Franklin", "PRENOM": "Aretha", "DATE_DE_NAISSANCE": "25/03/1942", "GENRE": "FEMME", "SCORE": 0, "CLASSEMENT": 4}, "Gardin Blanche": {"NOM": "Gardin", "PRENOM": "Blanche", "DATE_DE_NAISSANCE": "03/04/1977", "GENRE": "FEMME", "SCORE": 2, "CLASSEMENT": 56}, "Kasparov Garry": {"NOM": "Kasparov", "PRENOM": "Garry", "DATE_DE_NAISSANCE": "13/04/1963", "GENRE": "HOMME", "SCORE": 3, "CLASSEMENT": 47}}, "CONTROLE_DU_TEMPS": 1, "DESCRIPTION": "Championnats de France"}}}
+{
+    "PLAYERS": {
+        "2": {
+            "NOM": "Macron",
+            "PRENOM": "Emmanuel",
+            "DATE_DE_NAISSANCE": "21/12/1977",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 78
+        },
+        "3": {
+            "NOM": "Mathurin",
+            "PRENOM": "Alix",
+            "DATE_DE_NAISSANCE": "28/12/1977",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 1
+        },
+        "5": {
+            "NOM": "Trump",
+            "PRENOM": "Donald",
+            "DATE_DE_NAISSANCE": "14/06/1946",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 1589
+        },
+        "9": {
+            "NOM": "Pouyanné",
+            "PRENOM": "Patrick",
+            "DATE_DE_NAISSANCE": "24/06/1963",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 94
+        },
+        "10": {
+            "NOM": "Musk",
+            "PRENOM": "Elon",
+            "DATE_DE_NAISSANCE": "28/06/1971",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 31
+        },
+        "11": {
+            "NOM": "Pécresse",
+            "PRENOM": "Valérie",
+            "DATE_DE_NAISSANCE": "14/07/1967",
+            "GENRE": "FEMME",
+            "SCORE": 0,
+            "CLASSEMENT": 67
+        },
+        "13": {
+            "NOM": "Tyson",
+            "PRENOM": "Mike",
+            "DATE_DE_NAISSANCE": "30/06/1966",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 42
+        },
+        "16": {
+            "NOM": "Nebra",
+            "PRENOM": "Matthieu",
+            "DATE_DE_NAISSANCE": "05/08/1985",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 18
+        },
+        "25": {
+            "NOM": "Carlsen",
+            "PRENOM": "Magnus",
+            "DATE_DE_NAISSANCE": "30/11/1990",
+            "GENRE": "HOMME",
+            "SCORE": 2,
+            "CLASSEMENT": 1
+        },
+        "26": {
+            "NOM": "Einstein",
+            "PRENOM": "Albert",
+            "DATE_DE_NAISSANCE": "14/03/1879",
+            "GENRE": "HOMME",
+            "SCORE": 2,
+            "CLASSEMENT": 2
+        },
+        "27": {
+            "NOM": "Kasparov",
+            "PRENOM": "Garry",
+            "DATE_DE_NAISSANCE": "13/04/1963",
+            "GENRE": "HOMME",
+            "SCORE": 2,
+            "CLASSEMENT": 3
+        },
+        "28": {
+            "NOM": "Gardin",
+            "PRENOM": "Blanche",
+            "DATE_DE_NAISSANCE": "03/04/1977",
+            "GENRE": "FEMME",
+            "SCORE": 2,
+            "CLASSEMENT": 4
+        },
+        "29": {
+            "NOM": "Clooney",
+            "PRENOM": "George",
+            "DATE_DE_NAISSANCE": "06/05/1961",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 5
+        },
+        "30": {
+            "NOM": "Franklin",
+            "PRENOM": "Aretha",
+            "DATE_DE_NAISSANCE": "25/03/1942",
+            "GENRE": "FEMME",
+            "SCORE": 0,
+            "CLASSEMENT": 6
+        },
+        "31": {
+            "NOM": "Dujardin",
+            "PRENOM": "Jean",
+            "DATE_DE_NAISSANCE": "19/06/1972",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 7
+        },
+        "32": {
+            "NOM": "Elmaleh",
+            "PRENOM": "Gad",
+            "DATE_DE_NAISSANCE": "19/04/1971",
+            "GENRE": "HOMME",
+            "SCORE": 0,
+            "CLASSEMENT": 8
+        }
+    },
+    "TOURNAMENT": {
+        "1": {
+            "NOM": "Championnat de France",
+            "NOMBRE_DE_JOUEURS": 8,
+            "LIEU": "Paris",
+            "DATE": "09/12/2022",
+            "NOMBRE_DE_TOURS": 3,
+            "ROUNDS": {
+                "Round 0": {
+                    "Match 0": "Carlsen Magnus vs Elmaleh Gad",
+                    "Match 1": "Clooney George vs Franklin Aretha",
+                    "Match 2": "Dujardin Jean vs Gardin Blanche",
+                    "Match 3": "Einstein Albert vs Kasparov Garry"
+                },
+                "Round 1": {
+                    "Match 0": "Clooney George vs Carlsen Magnus",
+                    "Match 1": "Elmaleh Gad vs Dujardin Jean",
+                    "Match 2": "Gardin Blanche vs Einstein Albert",
+                    "Match 3": "Kasparov Garry vs Franklin Aretha"
+                },
+                "Round 2": {
+                    "Match 0": "Clooney George vs Gardin Blanche",
+                    "Match 1": "Elmaleh Gad vs Carlsen Magnus",
+                    "Match 2": "Kasparov Garry vs Dujardin Jean",
+                    "Match 3": "Einstein Albert vs Franklin Aretha"
+                }
+            },
+            "JOUEURS": {
+                "Carlsen Magnus": {
+                    "NOM": "Carlsen",
+                    "PRENOM": "Magnus",
+                    "DATE_DE_NAISSANCE": "30/11/1990",
+                    "GENRE": "HOMME",
+                    "SCORE": 1,
+                    "CLASSEMENT": 1
+                },
+                "Clooney George": {
+                    "NOM": "Clooney",
+                    "PRENOM": "George",
+                    "DATE_DE_NAISSANCE": "06/05/1961",
+                    "GENRE": "HOMME",
+                    "SCORE": 2,
+                    "CLASSEMENT": 3
+                },
+                "Dujardin Jean": {
+                    "NOM": "Dujardin",
+                    "PRENOM": "Jean",
+                    "DATE_DE_NAISSANCE": "19/06/1972",
+                    "GENRE": "HOMME",
+                    "SCORE": 0,
+                    "CLASSEMENT": 5
+                },
+                "Einstein Albert": {
+                    "NOM": "Einstein",
+                    "PRENOM": "Albert",
+                    "DATE_DE_NAISSANCE": "14/03/1879",
+                    "GENRE": "HOMME",
+                    "SCORE": 2,
+                    "CLASSEMENT": 2
+                },
+                "Elmaleh Gad": {
+                    "NOM": "Elmaleh",
+                    "PRENOM": "Gad",
+                    "DATE_DE_NAISSANCE": "19/04/1971",
+                    "GENRE": "HOMME",
+                    "SCORE": 2,
+                    "CLASSEMENT": 10
+                },
+                "Franklin Aretha": {
+                    "NOM": "Franklin",
+                    "PRENOM": "Aretha",
+                    "DATE_DE_NAISSANCE": "25/03/1942",
+                    "GENRE": "FEMME",
+                    "SCORE": 0,
+                    "CLASSEMENT": 4
+                },
+                "Gardin Blanche": {
+                    "NOM": "Gardin",
+                    "PRENOM": "Blanche",
+                    "DATE_DE_NAISSANCE": "03/04/1977",
+                    "GENRE": "FEMME",
+                    "SCORE": 2,
+                    "CLASSEMENT": 56
+                },
+                "Kasparov Garry": {
+                    "NOM": "Kasparov",
+                    "PRENOM": "Garry",
+                    "DATE_DE_NAISSANCE": "13/04/1963",
+                    "GENRE": "HOMME",
+                    "SCORE": 3,
+                    "CLASSEMENT": 47
+                }
+            },
+            "CONTROLE_DU_TEMPS": 1,
+            "DESCRIPTION": "Championnats de France"
+        }
+    }
+}
