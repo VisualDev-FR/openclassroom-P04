@@ -17,7 +17,7 @@ class Player:
     __m_gender: Gender = None
     __m_assessement: int = 0
     __m_score: int = 0
-    __m_encounteredPlayers: dict[Self] = None
+    __m_encounteredPlayers: dict = None
 
     def __init__(self, firstName: str, lastName: str, birthday: datetime, gender: Gender, assessement: int) -> None:
         self.__m_firstName = firstName
