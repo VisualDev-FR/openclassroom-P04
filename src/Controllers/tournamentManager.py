@@ -35,11 +35,20 @@ def createTournament():
         # add that player to the tournament
         tournament.addPlayer(players[playerIndex])
 
-    # we generate the first round, based on the players assessements
-    nextRound = roundManager.generateFirstRound(tournament)
+    roundIndex: int = 0
 
     # next rounds generation
-    for i in range(tournament.getRoundsCount()):
+    while roundIndex < tournament.getRoundsCount():
+
+        # we generate the first round, based on the players assessements
+        nextRound = (
+            roundManager.generateFirstRound(tournament),
+            roundManager.generateRound(tournament, roundIndex)
+        )[roundIndex > 0]
+
+        # add the round instance to the created tournament
+        tournament.addRound(nextRound)
+        roundIndex += 1
 
         # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne'
         AppView.printRound(nextRound)
@@ -67,16 +76,8 @@ def createTournament():
                 player2.increaseScore(1)
                 match[1][1] = 1
 
-        # set the hour of the end of the round, once all winners have been designated
+        # set the the end hour of the round, once all winners have been designated
         nextRound.end()
-
-        # generate one round, given the tournament state
-        AppView.blankLine()
-        nextRound = roundManager.generateRound(tournament, i)
-        tournament.addRound(nextRound)
-
-    # end the last round
-    nextRound.end()
 
     # print the current section
     AppView.printSection("RESULTATS")
@@ -160,7 +161,7 @@ def printMatch(match: tuple, index: int):
             index=index,
             p1=match[roundConsts.PLAYER_1_KEY],
             p2=match[roundConsts.PLAYER_2_KEY],
-            s1=match[roundConsts.PLAYER_2_SCORE_KEY],
+            s1=match[roundConsts.PLAYER_1_SCORE_KEY],
             s2=match[roundConsts.PLAYER_2_SCORE_KEY]
         )
     )
