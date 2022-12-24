@@ -4,8 +4,7 @@ import Views.appInputs as AppInput
 import Views.appView as AppView
 import Controllers.roundManager as roundManager
 import Controllers.dbManager as database
-from Config import tournamentConst
-import json
+from Config import tournamentConst, roundConsts
 import typing
 
 
@@ -53,7 +52,20 @@ def createTournament():
 
             # ask to the user, the results of the match n
             winner: Player = AppInput.inputWinner(player1, player2)
-            winner.increaseScore()
+
+            if winner is None:
+                player1.increaseScore(0.5)
+                player2.increaseScore(0.5)
+                match[0][1] = 0.5
+                match[1][1] = 0.5
+
+            elif winner == player1:
+                player1.increaseScore(1)
+                match[0][1] = 1
+
+            elif winner == player2:
+                player2.increaseScore(1)
+                match[1][1] = 1
 
         # set the hour of the end of the round, once all winners have been designated
         nextRound.end()
@@ -70,7 +82,12 @@ def createTournament():
     AppView.printSection("RESULTATS")
 
     for player in tournament.getScoreSortedPlayers():
-        print("    " + player.getFullName() + " " + str(player.getScore()) + " " + str(player.getAssessement()))
+        print(
+            "    " +
+            player.getFullName() + (" ") +
+            str(player.getScore()) + " " +
+            str(player.getAssessement())
+        )
 
     AppView.printSection("MISE A JOUR DES CLASSEMENTS")
 
@@ -136,13 +153,40 @@ def printAssessementSortedPlayers(serializedTournament: dict):
     AppView.printPlayers(sortedPlayers)
 
 
+def printMatch(match: tuple, index: int):
+
+    print(
+        (" " * 4) + "Match {index} : {p1}({s1}) vs {p2} ({s2})".format(
+            index=index,
+            p1=match[roundConsts.PLAYER_1_KEY],
+            p2=match[roundConsts.PLAYER_2_KEY],
+            s1=match[roundConsts.PLAYER_2_SCORE_KEY],
+            s2=match[roundConsts.PLAYER_2_SCORE_KEY]
+        )
+    )
+
+
 def printAllTournamentRounds(serializedTournament: dict):
 
     serializedRounds: dict = serializedTournament[tournamentConst.ROUNDS_KEY]
 
     AppView.printSection('ROUNDS')
 
-    print(json.dumps(serializedRounds, indent=4))
+    for round in serializedRounds.values():
+
+        roundName = round[roundConsts.ROUND_NAME_KEY]
+        roundBegin = round[roundConsts.BEGIN_KEY]
+        roundEnd = round[roundConsts.END_KEY]
+        matchList = round[roundConsts.MATCH_LIST_KEY]
+
+        print(roundName + " :")
+        print((" " * 4) + roundConsts.BEGIN_KEY + " : " + roundBegin)
+        print((" " * 4) + roundConsts.END_KEY + " : " + roundEnd)
+
+        for i in range(len(matchList)):
+            printMatch(matchList[i], i + 1)
+
+        AppView.blankLine()
 
 
 def printAllTournamentMatch(serializedTournament: dict):
@@ -154,8 +198,8 @@ def printAllTournamentMatch(serializedTournament: dict):
     matchIndex = 1
 
     for round in serializedRounds.values():
-        for match in round.values():
-            print("    Match " + str(matchIndex) + " : " + match)
+        for match in round[roundConsts.MATCH_LIST_KEY]:
+            printMatch(match, matchIndex)
             matchIndex += 1
     print(" ")
 

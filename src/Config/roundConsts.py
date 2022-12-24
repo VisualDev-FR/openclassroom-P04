@@ -1,0 +1,8 @@
+PLAYER_1_KEY = "Joueur_1"
+PLAYER_2_KEY = "Joueur_2"
+PLAYER_1_SCORE_KEY = "Score_Joueur_1"
+PLAYER_2_SCORE_KEY = "Score_Joueur_2"
+ROUND_NAME_KEY = "Nom"
+BEGIN_KEY = "Debut"
+END_KEY = "Fin"
+MATCH_LIST_KEY = "Liste_match"

@@ -16,7 +16,7 @@ class Player:
     __m_birthDay: datetime = None
     __m_gender: Gender = None
     __m_assessement: int = 0
-    __m_score: int = 0
+    __m_score: float = 0.0
     __m_encounteredPlayers: dict = None
 
     def __init__(self, firstName: str, lastName: str, birthday: datetime, gender: Gender, assessement: int) -> None:
@@ -42,13 +42,13 @@ class Player:
             assessement=assessement
         )
 
-    def increaseScore(self) -> None:
-        self.__m_score += 1
+    def increaseScore(self, score) -> None:
+        self.__m_score += score
 
-    def setScore(cls, newScore: int) -> None:
+    def setScore(cls, newScore: float) -> None:
         cls.__m_score = newScore
 
-    def getScore(cls) -> int:
+    def getScore(cls) -> float:
         return cls.__m_score
 
     def getFullName(cls, reverse: bool = True) -> str:

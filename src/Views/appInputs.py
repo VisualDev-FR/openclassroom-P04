@@ -99,17 +99,23 @@ def inputWinner(player1: Player, player2: Player, indent: int = 4) -> Player:
 
     winner: Player = None
 
-    while (winner is None):
+    while True:
         winnerIndex = input(
-            (" " * indent) + "{p1}[0] vs {p2}[1] : vainqueur = "
+            (" " * indent) + "{p1}[0] vs {p2}[1] (égalité = [2]): vainqueur = "
             .format(p1=player1.getFullName(), p2=player2.getFullName())
         )
 
         if winnerIndex == "0":
             winner = player1
+            break
         elif winnerIndex == "1":
             winner = player2
+            break
+        elif winnerIndex == "2":
+            break
         else:
-            print((" " * indent) + "Veuillez rentrer un nombre entre 0 et 1 pour désigner le vainqueur.")
+            print(
+                (" " * indent) + "Veuillez rentrer un nombre entre 0 et 2 pour désigner le vainqueur."
+            )
 
     return winner
