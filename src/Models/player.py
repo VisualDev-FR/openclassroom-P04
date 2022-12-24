@@ -17,7 +17,7 @@ class Player:
     __m_gender: Gender = None
     __m_assessement: int = 0
     __m_score: float = 0.0
-    __m_encounteredPlayers: dict = None
+    __m_encounteredPlayers: list = None
 
     def __init__(self, firstName: str, lastName: str, birthday: datetime, gender: Gender, assessement: int) -> None:
         self.__m_firstName = firstName
@@ -25,6 +25,7 @@ class Player:
         self.__m_birthDay = birthday
         self.__m_gender = gender
         self.__m_assessement = assessement
+        self.__m_encounteredPlayers = []
 
     @classmethod
     def deserialize(self, serializedPlayer: dict) -> Self:
@@ -70,7 +71,7 @@ class Player:
         cls.__m_assessement = assessement
 
     def encountered(cls, player: Self) -> bool:
-        return cls.__m_encounteredPlayers.__contains__(player)
+        return player in cls.__m_encounteredPlayers
 
     def encounter(cls, encounteredPlayer: Self):
         cls.__m_encounteredPlayers.append(encounteredPlayer)

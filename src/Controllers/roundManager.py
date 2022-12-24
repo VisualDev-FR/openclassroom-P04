@@ -27,8 +27,18 @@ def generateRound(tournament: Tournament, roundIndex: int) -> Round:
     for i in range(int(len(sortedPlayers) / 2)):
 
         player1 = sortedPlayers[i]
-        player2 = sortedPlayers[i + int(len(sortedPlayers) / 2)]
 
-        newRound.addMatch(player1, player2)
+        opponentFound: bool = False
+        index: int = 0
+
+        while not opponentFound and index < 8:
+
+            player2 = sortedPlayers[(i + int(len(sortedPlayers) / 2) + index) % len(sortedPlayers)]
+
+            if not player1.encountered(player2) and player1 != player2:
+                newRound.addMatch(player1, player2)
+                break
+
+            index += 1
 
     return newRound

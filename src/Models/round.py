@@ -29,6 +29,7 @@ class Round:
         return cls.__m_name
 
     def addMatch(cls, player1: Player, player2: Player) -> None:
+        player1.encounter(player2)
         cls.__m_matchList.append(
             (
                 [player1, 0],
