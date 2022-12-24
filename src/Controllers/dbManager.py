@@ -65,9 +65,18 @@ def updatePlayer(playerToUpdate: Player):
     db.table(PLAYERS_TABLE).insert(playerToUpdate.serialize())
 
 
-def prettifyDatabase():
+def prettifyTournamentDatabase():
 
     db = TinyDB(config.DATABASE_PATH).table(TOURNAMENT_TABLE).all()
+
+    print(json.dumps(db, indent=4))
+
+    appView.pressAnyKeyToExit()
+
+
+def prettifyPlayerDatabase():
+
+    db = TinyDB(config.DATABASE_PATH).table(PLAYERS_TABLE).all()
 
     print(json.dumps(db, indent=4))
 

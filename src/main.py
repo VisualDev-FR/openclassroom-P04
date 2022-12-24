@@ -56,7 +56,10 @@ while runtime:
             runtime = False
 
         elif choice == "8":
-            dbManager.prettifyDatabase()
+            dbManager.prettifyTournamentDatabase()
+
+        elif choice == "9":
+            dbManager.prettifyPlayerDatabase()
 
     except KeyboardInterrupt:
         pass
