@@ -84,3 +84,44 @@ def inputPlayer() -> Player:
         gender=inGender,
         assessement=inAssessement
         )
+
+
+def modifyAssessement():
+
+    # read database
+    players = sorted(database.getPlayers(), key=lambda player: player.getAssessement())
+
+    # print the current section name
+    AppView.printSection("JOUEURS")
+
+    # print all players
+    AppView.printPlayers(players)
+
+    # print the end of the section
+    AppView.printSection(" ")
+
+    # ask the user to display details about players
+    playerIndex = input(
+        "Séléctionnez un joueur pour modifier son classement, " +
+        "ou appuyez sur entrée pour revenir au menu principal : ")
+
+    # break if the user press enter key, else print the selected player's details
+    while playerIndex != "":
+
+        try:
+
+            player: Player = players[int(playerIndex)]
+            player.setAssessement(AppInput.intInput(
+                "{fullName} ({assessement})".format(
+                    fullName=player.getFullName(),
+                    assessement=player.getAssessement())
+                )
+            )
+            database.updatePlayer(player)
+
+            playerIndex = input(
+                "Séléctionnez un joueur pour modifier son classement, " +
+                "ou appuyez sur entrée pour revenir au menu principal : ")
+        except Exception:
+            # catch the wrong inputs
+            playerIndex = input("Veuillez spécifier un nombre entre 0 et " + str(len(players)))

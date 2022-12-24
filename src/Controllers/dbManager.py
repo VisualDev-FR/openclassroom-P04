@@ -4,6 +4,7 @@ from Models.player import Player
 from Models.tournament import Tournament
 from Views import appView
 import json
+import typing
 
 PLAYERS_TABLE = "PLAYERS"
 TOURNAMENT_TABLE = "TOURNAMENT"
@@ -27,7 +28,7 @@ def saveTournament(tournamentToSave: Tournament):
     db.table(TOURNAMENT_TABLE).insert(tournamentToSave.serialize())
 
 
-def getPlayers() -> list:
+def getPlayers() -> typing.List[Player]:
 
     # database buffer
     db = TinyDB(config.DATABASE_PATH)

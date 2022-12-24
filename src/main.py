@@ -13,7 +13,8 @@ while runtime:
     print("[3] : Afficher tous les tournois existant")
     print('[4] : Afficher tous les joueurs par ordre alphabétique')
     print("[5] : Afficher tous les joueurs par classement")
-    print("[6] : Quitter l'application\n")
+    print("[6] : Modifier le classement d'un joueur")
+    print("[7] : Quitter l'application\n")
 
     AppView.printSection(" ")
 
@@ -44,13 +45,17 @@ while runtime:
             playerManager.displayAssessementSortedPlayers()
 
         elif choice == "6":
+            # player assessement modification
+            playerManager.modifyAssessement()
+
+        elif choice == "7":
             # Clear the console and break the runtime
             AppView.clearConsole()
 
             # exit the application
             runtime = False
 
-        elif choice == "7":
+        elif choice == "8":
             dbManager.prettifyDatabase()
 
     except KeyboardInterrupt:
