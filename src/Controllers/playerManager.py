@@ -6,6 +6,7 @@ import json
 
 
 def createPlayer():
+    """ Main function allowing to create a player and to save it into the database """
 
     # print the section name
     AppView.printSection("CREATION D'UN JOUEUR")
@@ -21,6 +22,9 @@ def createPlayer():
 
 
 def displayPlayers(players):
+    """ Allow to display all players given a player list, and ask the user to select one player
+        in order to have more details.
+     """
 
     # print the current section name
     AppView.printSection("JOUEURS")
@@ -50,6 +54,7 @@ def displayPlayers(players):
 
 
 def displayAlphabeticalSortedPlayers():
+    """ get all the players contained in the database, sort them by name and display them """
 
     # read the database
     players = sorted(database.getPlayers(), key=lambda player: player.getFullName(reverse=True))
@@ -59,6 +64,8 @@ def displayAlphabeticalSortedPlayers():
 
 
 def displayAssessementSortedPlayers():
+    """ get all the players contained in the database, sort them by assessement and display them """
+
     # read the database
     players = sorted(database.getPlayers(), key=lambda player: player.getAssessement())
 
@@ -67,6 +74,7 @@ def displayAssessementSortedPlayers():
 
 
 def inputPlayer() -> Player:
+    """ Standard function allowing to create a player from user inputs, and return a new instance of player """
 
     # ask all the necessary inputs to create one Player instance
     inFirstName = AppInput.stringInput("Prénom")
@@ -87,6 +95,8 @@ def inputPlayer() -> Player:
 
 
 def modifyAssessement():
+    """ Function allowing to modify the assessement of a player. Displays the actual assessment,
+    ask the new assessement to the user, and update the player into the database """
 
     # read database
     players = sorted(database.getPlayers(), key=lambda player: player.getAssessement())

@@ -11,6 +11,7 @@ TOURNAMENT_TABLE = "TOURNAMENT"
 
 
 def savePlayer(playerToSave: Player):
+    """ Allow to save one player instance into the database """
 
     # database buffer
     db = TinyDB(config.DATABASE_PATH)
@@ -20,6 +21,7 @@ def savePlayer(playerToSave: Player):
 
 
 def saveTournament(tournamentToSave: Tournament):
+    """ Allow to save one tournament instance into the database """
 
     # database buffer
     db = TinyDB(config.DATABASE_PATH)
@@ -29,6 +31,7 @@ def saveTournament(tournamentToSave: Tournament):
 
 
 def getPlayers() -> typing.List[Player]:
+    """ return the entire table of players, contained into the database """
 
     # database buffer
     db = TinyDB(config.DATABASE_PATH)
@@ -48,10 +51,12 @@ def getPlayers() -> typing.List[Player]:
 
 
 def getTournaments() -> dict:
+    """ return the entire table of tournaments contained into the database """
     return TinyDB(config.DATABASE_PATH).table(TOURNAMENT_TABLE).all()
 
 
 def updatePlayer(playerToUpdate: Player):
+    """ Remove and replace a specified player into the database, given a player instance """
 
     # database buffer
     db = TinyDB(config.DATABASE_PATH)
@@ -66,6 +71,7 @@ def updatePlayer(playerToUpdate: Player):
 
 
 def prettifyTournamentDatabase():
+    """ debug function, allowing to display the entire tournament database into the terminal """
 
     db = TinyDB(config.DATABASE_PATH).table(TOURNAMENT_TABLE).all()
 
@@ -75,6 +81,7 @@ def prettifyTournamentDatabase():
 
 
 def prettifyPlayerDatabase():
+    """ debug function allowing to display the entire players database into the terminal """
 
     db = TinyDB(config.DATABASE_PATH).table(PLAYERS_TABLE).all()
 

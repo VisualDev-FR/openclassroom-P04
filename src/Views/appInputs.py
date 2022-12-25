@@ -5,6 +5,8 @@ from Config import config
 
 
 def intInput(message: str, indent: int = 4) -> int:
+    """ generic function allowing to ask the user to give one integer value
+        and return the answer if the format is good """
 
     inputValue = -1
 
@@ -22,6 +24,9 @@ def intInput(message: str, indent: int = 4) -> int:
 
 
 def intInputBetween(minValue: int, maxValue: int, message: str, indent: int = 4) -> int:
+    """ generic function allowing to ask the user to give one integer, between two values
+        and return the given value if the format is good and if it is contained in the good
+        specified values """
 
     inputValue = -1
 
@@ -47,10 +52,14 @@ def intInputBetween(minValue: int, maxValue: int, message: str, indent: int = 4)
 
 
 def stringInput(message: str, indent: int = 4) -> str:
+    """ Generic function allowing to ask a string to the user and return the given
+    string without spaces at the begin / at the end  """
+
     return input((" " * indent) + message + " : ").strip()
 
 
 def dateInput(message: str, indent: int = 4) -> datetime:
+    """ generic function allowing to ask a date to the user, and retunr a datetime object if the format is good """
 
     dateIn: datetime = None
 
@@ -67,6 +76,8 @@ def dateInput(message: str, indent: int = 4) -> datetime:
 
 
 def genderInput(indent: int = 4) -> Gender:
+    """ generic function allowing to ask a gender to the user. Return a gender value
+        if the format of the given answer is good """
 
     genderIn: Gender = None
 
@@ -82,6 +93,7 @@ def genderInput(indent: int = 4) -> Gender:
 
 
 def timeControlInput(indent: int = 4) -> TimeControl:
+    """ generic function allowing to the user to choose a correct timecontrol """
 
     timeControl: TimeControl = None
 
@@ -96,6 +108,8 @@ def timeControlInput(indent: int = 4) -> TimeControl:
 
 
 def inputWinner(player1: Player, player2: Player, indent: int = 4) -> Player:
+    """ generic function allowing to the user to designate a winner between two players or a tie.
+        return the instance of the winner, or null in case of tie """
 
     winner: Player = None
 

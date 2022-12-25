@@ -5,6 +5,9 @@ import typing
 
 
 def generateFirstRound(tournament: Tournament) -> Round:
+    """ Function allowing to generate the first round of a tournament.
+        sort the players by assessement and generate pairs according to the
+        swiss tournament rules. """
 
     sortedPlayers: typing.List[Player] = tournament.getAssessementSortedPlayers()
     newRound = Round(0)
@@ -20,6 +23,9 @@ def generateFirstRound(tournament: Tournament) -> Round:
 
 
 def generateRound(tournament: Tournament, roundIndex: int) -> Round:
+    """ Function allowing to generate the next rounds of a tournament.
+        sort the players by score and generate pairs according to the
+        swiss tournament rules, avoiding the players to encouter more than one time """
 
     sortedPlayers: typing.List[Player] = tournament.getScoreSortedPlayers()
     newRound = Round(roundIndex)

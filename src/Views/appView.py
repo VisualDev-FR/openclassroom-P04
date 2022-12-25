@@ -5,6 +5,7 @@ import os
 
 
 def clearConsole():
+    """ generic function allowing to clear the console between two actions """
 
     # Run different command, depending on the os
     if os.name == "nt":
@@ -16,6 +17,7 @@ def clearConsole():
 
 
 def printSection(sectionName: str):
+    """ Generic function allowing to display a centered section name """
 
     SECTION_LENGHT = 70
 
@@ -27,6 +29,7 @@ def printSection(sectionName: str):
 
 
 def printRound(round: Round):
+    """ generic function allowing to print all the matches of a round """
 
     printSection(("Round {index}".format(index=round.getIndex() + 1).upper()))
 
@@ -43,11 +46,14 @@ def printRound(round: Round):
 
 
 def pressAnyKeyToExit():
+    """ genric function allowing to wait any user input before to continue the program """
+
     print("Appuyez sur Entrée pour revenir au menu principal.")
     input()
 
 
 def printPlayers(players: list):
+    """ generic function allowing to print a list of players instances right in front of their indexes in the list """
 
     for i in range(len(players)):
 
@@ -61,6 +67,7 @@ def printPlayers(players: list):
 
 
 def printTournaments(tournaments: dict):
+    """ function allowing to print a list of tournament instances, with their indexes in the list """
 
     for i in range(len(tournaments)):
 
@@ -73,4 +80,5 @@ def printTournaments(tournaments: dict):
 
 
 def blankLine():
+    """ function allowing to print a blank line into the terminal """
     print(" ")

@@ -56,9 +56,11 @@ while runtime:
             runtime = False
 
         elif choice == "8":
+            # debug function allowing to see all the tournaments contained into the database
             dbManager.prettifyTournamentDatabase()
 
         elif choice == "9":
+            # debug function allowing to display all the players contained into the database
             dbManager.prettifyPlayerDatabase()
 
     except KeyboardInterrupt:

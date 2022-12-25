@@ -9,6 +9,9 @@ import typing
 
 
 def createTournament():
+    """ main function allowing to create a tournament from the user inputs
+        and save it into the database """
+
     # print the current section
     AppView.printSection("DEFINITION DU TOURNOI")
 
@@ -106,6 +109,7 @@ def createTournament():
 
 
 def inputTournament() -> Tournament:
+    """ function allowing to create a new tournament instance, from the user inputs """
 
     # ask all necessary data to create one Tournament instance
     roundsCount = AppInput.intInput("Nombre de tours")
@@ -130,6 +134,8 @@ def inputTournament() -> Tournament:
 
 
 def printAlphaSortedPlayers(serializedTournament: dict):
+    """ function allowing to print a list of players sorted by name,
+        from a dictionnary of serialized players """
 
     # deserialize all the players registered in the tournament
     deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
@@ -143,6 +149,9 @@ def printAlphaSortedPlayers(serializedTournament: dict):
 
 
 def printAssessementSortedPlayers(serializedTournament: dict):
+    """ function allowing to print a list of players sorted by assessement,
+        from a dictionnary of serialized players """
+
     # deserialize all the players registered in the tournament
     deserializedPlayers = getPlayersFromSerializedTournament(serializedTournament)
 
@@ -155,6 +164,9 @@ def printAssessementSortedPlayers(serializedTournament: dict):
 
 
 def printMatch(match: tuple, index: int):
+    """ generic function allowing to print a match with the next format :
+
+        Match 1 : player1 (score) vs player2 (score) """
 
     print(
         (" " * 4) + "Match {index} : {p1}({s1}) vs {p2} ({s2})".format(
@@ -168,6 +180,8 @@ def printMatch(match: tuple, index: int):
 
 
 def printAllTournamentRounds(serializedTournament: dict):
+    """ function allowing to print all rounds contained in a tournament,
+        from a dictionnary containing one serialized tournament instance """
 
     serializedRounds: dict = serializedTournament[tournamentConst.ROUNDS_KEY]
 
@@ -191,6 +205,8 @@ def printAllTournamentRounds(serializedTournament: dict):
 
 
 def printAllTournamentMatch(serializedTournament: dict):
+    """ function allowing to print all matchs contained in a tournament,
+        from a dictionnary containing one serialized tournament instance """
 
     serializedRounds: dict = serializedTournament[tournamentConst.ROUNDS_KEY]
 
@@ -206,6 +222,8 @@ def printAllTournamentMatch(serializedTournament: dict):
 
 
 def getPlayersFromSerializedTournament(serializedTournament: dict) -> typing.List[Player]:
+    """ function allowing to get all serialized players contained in a tournament,
+        from a dictionnary containing one serialized tournament instance  """
 
     # get the dictionnary of all player registered in the tournament
     serializedPlayers: dict = serializedTournament[tournamentConst.PLAYERS_KEY]
@@ -215,6 +233,9 @@ def getPlayersFromSerializedTournament(serializedTournament: dict) -> typing.Lis
 
 
 def displayTournaments():
+    """ main function displaying all tournaments contained into the database,
+        and ask the user to choose one tournament, in order to have more details """
+
     # print the current section name
     AppView.printSection("TOURNOIS")
 

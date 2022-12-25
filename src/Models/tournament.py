@@ -14,16 +14,15 @@ class TimeControl(Enum):
 
 class Tournament:
 
-    __m_roundsList: typing.List[Round]            # List of all tournament's rounds
-    __m_playersList: list           # List of the tournament's players
-
-    __m_roundsCount: int            # Number of rounds played in the tournament
-    __m_playersCount: int           # Number of players participating to the tournament
-    __m_name: str                   # Name of the tournament
-    __m_location: str               # Location of the tournament
-    __m_date: datetime              # Date of the tournament
-    __m_timecontrol: TimeControl    # Used time control for the tournament
-    __m_Description: str            # Description of the tournament
+    __m_roundsList: typing.List[Round]
+    __m_playersList: list
+    __m_roundsCount: int
+    __m_playersCount: int
+    __m_name: str
+    __m_location: str
+    __m_date: datetime
+    __m_timecontrol: TimeControl
+    __m_Description: str
 
     def __init__(
             self,
