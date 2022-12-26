@@ -118,7 +118,7 @@ def inputTournament() -> Tournament:
     # ask all necessary data to create one Tournament instance
     roundsCount = AppInput.intInput("Nombre de tours")
     playersCount = 8
-    name = AppInput.stringInput("Nom du trournoi")
+    name = AppInput.stringInput("Nom du tournoi")
     location = AppInput.stringInput("Lieu du tournoi")
     tDate = AppInput.dateInput("Date du tournoi")
     timeControl = AppInput.timeControlInput()
