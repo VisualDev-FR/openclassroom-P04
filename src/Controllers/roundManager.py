@@ -18,6 +18,8 @@ def generateFirstRound(tournament: Tournament) -> Round:
         player2 = sortedPlayers[i + int(len(sortedPlayers) / 2)]
 
         newRound.addMatch(player1, player2)
+        player1.encounter(player2)
+        player2.encounter(player1)
 
     return newRound
 
@@ -30,21 +32,31 @@ def generateRound(tournament: Tournament, roundIndex: int) -> Round:
     sortedPlayers: typing.List[Player] = tournament.getScoreSortedPlayers()
     newRound = Round(roundIndex)
 
+    associatedPlayers = []
+
     for i in range(int(len(sortedPlayers) / 2)):
 
-        player1 = sortedPlayers[i]
+        index = int(len(sortedPlayers) / 2)
+        found = False
 
-        opponentFound: bool = False
-        index: int = 0
+        while not found:
 
-        while not opponentFound and index < 8:
+            player1 = sortedPlayers[i]
+            player2 = sortedPlayers[index]
 
-            player2 = sortedPlayers[(i + int(len(sortedPlayers) / 2) + index) % len(sortedPlayers)]
+            if not player1.encountered(player2) and player2 not in associatedPlayers:
 
-            if not player1.encountered(player2) and player1 != player2:
                 newRound.addMatch(player1, player2)
-                break
 
-            index += 1
+                player1.encounter(player2)
+                player2.encounter(player1)
+
+                associatedPlayers.append(player1)
+                associatedPlayers.append(player2)
+
+                found = True
+
+            else:
+                index += 1
 
     return newRound

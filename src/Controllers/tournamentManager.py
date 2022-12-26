@@ -38,16 +38,15 @@ def createTournament():
         # add that player to the tournament
         tournament.addPlayer(players[playerIndex])
 
+    # generation of rounds
     roundIndex: int = 0
-
-    # next rounds generation
     while roundIndex < tournament.getRoundsCount():
 
         # we generate the first round, based on the players assessements
-        nextRound = (
-            roundManager.generateFirstRound(tournament),
-            roundManager.generateRound(tournament, roundIndex)
-        )[roundIndex > 0]
+        if roundIndex == 0:
+            nextRound = roundManager.generateFirstRound(tournament)
+        else:
+            nextRound = roundManager.generateRound(tournament, roundIndex)
 
         # add the round instance to the created tournament
         tournament.addRound(nextRound)
@@ -86,18 +85,23 @@ def createTournament():
     AppView.printSection("RESULTATS")
 
     for player in tournament.getScoreSortedPlayers():
+
+        playerName: str = player.getFullName()
+
         print(
             "    " +
-            player.getFullName() + (" ") +
-            str(player.getScore()) + " " +
-            str(player.getAssessement())
+            playerName + (" " * (25 - len(playerName))) +
+            str(player.getScore()) + " "
         )
 
     AppView.printSection("MISE A JOUR DES CLASSEMENTS")
 
     # print all the player scores
     for player in tournament.getScoreSortedPlayers():
-        player.setAssessement(AppInput.intInput(player.getFullName()))
+        player.setAssessement(AppInput.intInput("{fullName} ({score})".format(
+            fullName=player.getFullName(),
+            score=player.getAssessement()
+        )))
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database

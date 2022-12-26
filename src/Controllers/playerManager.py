@@ -98,7 +98,7 @@ def modifyAssessement():
     """ Function allowing to modify the assessement of a player. Displays the actual assessment,
     ask the new assessement to the user, and update the player into the database """
 
-    # read database
+    # read database and sort players by assessement
     players = sorted(database.getPlayers(), key=lambda player: player.getAssessement())
 
     # print the current section name
