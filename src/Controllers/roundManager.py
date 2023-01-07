@@ -57,6 +57,6 @@ def generateRound(tournament: Tournament, roundIndex: int) -> Round:
                 found = True
 
             else:
-                index += 1
+                index = (index + 1) % len(sortedPlayers)
 
     return newRound
