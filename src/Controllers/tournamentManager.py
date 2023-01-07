@@ -116,7 +116,7 @@ def inputTournament() -> Tournament:
     """ function allowing to create a new tournament instance, from the user inputs """
 
     # ask all necessary data to create one Tournament instance
-    roundsCount = AppInput.intInput("Nombre de tours")
+    roundsCount = 4
     playersCount = 8
     name = AppInput.stringInput("Nom du tournoi")
     location = AppInput.stringInput("Lieu du tournoi")
