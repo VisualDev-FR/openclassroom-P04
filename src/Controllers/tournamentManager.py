@@ -7,39 +7,37 @@ import Controllers.roundManager as roundManager
 import Controllers.dbManager as database
 from Config import tournamentConst, roundConsts
 import typing
+from Config import config
 
 
-def createTournament(buffer: TournamentBuffer) -> TournamentBuffer:
-    """ main function allowing to create a tournament from the user inputs
-        and save it into the database """
-
-    if buffer is None:
-        return create_tournament_from_scratch()
-
-    else:
-        userWantsToLoadBuffer: bool = AppInput.ask_user_to_load_buffer()
-
-        if userWantsToLoadBuffer:
-            return create_tournament_from_buffer(buffer=buffer)
-
-        else:
-            return create_tournament_from_scratch()
-
-
-def create_tournament_from_buffer(buffer: TournamentBuffer) -> TournamentBuffer:
-    pass
-
-
-def create_tournament_from_scratch() -> TournamentBuffer:
-
-    # print the current section
+def print_section_tournament_info():
     AppView.printSection("DEFINITION DU TOURNOI")
+    AppView.blankLine()
 
-    # ask to the user to give the tournaments inputs
-    tournament: Tournament = inputTournament()
 
-    # print the current section
+def print_section_player_choice():
     AppView.printSection("CHOIX DES JOUEURS")
+    AppView.blankLine()
+
+
+def print_section_results():
+    AppView.printSection("RESULTATS")
+    AppView.blankLine
+
+
+def print_section_update_assessements():
+    AppView.printSection("MISE A JOUR DES CLASSEMENTS")
+    AppView.blankLine()
+
+
+def print_section_end():
+    AppView.printSection("FIN")
+    AppView.pressAnyKeyToExit()
+
+
+def choose_players(buffer: TournamentBuffer) -> TournamentBuffer:
+
+    tournament = buffer.tournament
 
     # read all the Players table in the database
     players = database.getPlayers()
@@ -48,7 +46,7 @@ def create_tournament_from_scratch() -> TournamentBuffer:
     AppView.printPlayers(players)
 
     # players input parsing
-    for i in range(tournament.getPlayersCount()):
+    for i in range(buffer.selectedPlayers, tournament.getPlayersCount()):
 
         # ask to the user to select a player in the displayed list
         playerIndex = AppInput.intInputBetween(0, len(players) - 1, "Joueur " + str(i))
@@ -57,20 +55,23 @@ def create_tournament_from_scratch() -> TournamentBuffer:
 
         # add that player to the tournament
         tournament.addPlayer(players[playerIndex])
+        buffer.selectedPlayers += 1
+
+    buffer.set_players_choosen()
+
+
+def generate_rounds(buffer: TournamentBuffer):
+
+    tournament = buffer.tournament
 
     # generation of rounds
-    roundIndex: int = 0
-    while roundIndex < tournament.getRoundsCount():
+    while buffer.roundIndex < tournament.getRoundsCount():
 
         # we generate the first round, based on the players assessements
-        if roundIndex == 0:
+        if buffer.roundIndex == 0:
             nextRound = roundManager.generateFirstRound(tournament)
         else:
-            nextRound = roundManager.generateRound(tournament, roundIndex)
-
-        # add the round instance to the created tournament
-        tournament.addRound(nextRound)
-        roundIndex += 1
+            nextRound = roundManager.generateRound(tournament, buffer.roundIndex)
 
         # print the next matchs to play, ex: 'Match 1 : Thomas Menanteau vs Christophe Derenne'
         AppView.printRound(nextRound)
@@ -101,8 +102,14 @@ def create_tournament_from_scratch() -> TournamentBuffer:
         # set the the end hour of the round, once all winners have been designated
         nextRound.end()
 
-    # print the current section
-    AppView.printSection("RESULTATS")
+        # add the round instance to the created tournament
+        tournament.addRound(nextRound)
+        buffer.roundIndex += 1
+
+
+def print_results(buffer: TournamentBuffer):
+
+    tournament = buffer.tournament
 
     for player in tournament.getScoreSortedPlayers():
 
@@ -114,10 +121,11 @@ def create_tournament_from_scratch() -> TournamentBuffer:
             str(player.getScore()) + " "
         )
 
-    AppView.printSection("MISE A JOUR DES CLASSEMENTS")
+
+def update_assessements(buffer: TournamentBuffer):
 
     # print all the player scores
-    for player in tournament.getScoreSortedPlayers():
+    for player in buffer.tournament.getScoreSortedPlayers():
         player.setAssessement(AppInput.intInput("{fullName} ({score})".format(
             fullName=player.getFullName(),
             score=player.getAssessement()
@@ -125,19 +133,98 @@ def create_tournament_from_scratch() -> TournamentBuffer:
         database.updatePlayer(player)
 
     # at the end, we save the created tournament into the database
-    database.saveTournament(tournament)
+    database.saveTournament(buffer.tournament)
+
+
+def createTournament(buffer: TournamentBuffer) -> TournamentBuffer:
+
+    if buffer is None:
+        return create_tournament_from_scratch()
+
+    else:
+        print_section_tournament_info()
+        userWantsToLoadBuffer: bool = AppInput.ask_user_to_load_buffer()
+        AppView.clearConsole()
+
+        if userWantsToLoadBuffer:
+            return create_tournament_from_buffer(buffer=buffer)
+
+        else:
+            return create_tournament_from_scratch()
+
+
+def create_tournament_from_buffer(buffer: TournamentBuffer) -> TournamentBuffer:
 
     # print the current section
-    AppView.printSection("FIN")
-    AppView.pressAnyKeyToExit()
+
+    print_section_tournament_info()
+    buffer.print_tournament_infos()
+
+    tournament: buffer.tournament
+
+    try:
+
+        # players choice
+        print_section_player_choice()
+        buffer.print_choosen_players()
+        if not buffer.playersChoosen:
+            choose_players(buffer)
+
+        # rounds specification
+        buffer.print_specified_rounds()
+        generate_rounds(buffer)
+
+        # print the results of the tournament
+        print_section_results()
+        print_results(buffer)
+
+        # update the players assessement
+        print_section_update_assessements()
+        update_assessements(buffer)
+
+    except KeyboardInterrupt:
+        # in case of interruption, we return the currentBufffer of the tournament
+        return buffer
+
+    # return a null buffer if the tournament was created successfully
+    print_section_end()
+    return None
+
+
+def create_tournament_from_scratch() -> TournamentBuffer:
+
+    # ask to the user to give the tournaments inputs
+    print_section_tournament_info()
+    tournament: Tournament = inputTournament()
+    tournamentBuffer: TournamentBuffer = TournamentBuffer(tournament_=tournament)
+
+    try:
+        print_section_player_choice()
+        choose_players(tournamentBuffer)
+
+        generate_rounds(tournamentBuffer)
+
+        print_section_results()
+        print_results(tournamentBuffer)
+
+        print_section_update_assessements()
+        update_assessements(tournamentBuffer)
+
+    except KeyboardInterrupt:
+        # in case of interruption, we return the currentBufffer of the tournament
+        return tournamentBuffer
+
+    # return a null buffer if the tournament was created successfully
+    print_section_end()
+    return None
 
 
 def inputTournament() -> Tournament:
     """ function allowing to create a new tournament instance, from the user inputs """
 
     # ask all necessary data to create one Tournament instance
-    roundsCount = 4
-    playersCount = 8
+    roundsCount = config.NB_ROUNDS
+    playersCount = config.NB_PLAYERS
     name = AppInput.stringInput("Nom du tournoi")
     location = AppInput.stringInput("Lieu du tournoi")
     tDate = AppInput.dateInput("Date du tournoi")
@@ -187,22 +274,6 @@ def printAssessementSortedPlayers(serializedTournament: dict):
     AppView.printPlayers(sortedPlayers)
 
 
-def printMatch(match: tuple, index: int):
-    """ generic function allowing to print a match with the next format :
-
-        Match 1 : player1 (score) vs player2 (score) """
-
-    print(
-        (" " * 4) + "Match {index} : {p1}({s1}) vs {p2} ({s2})".format(
-            index=index,
-            p1=match[roundConsts.PLAYER_1_KEY],
-            p2=match[roundConsts.PLAYER_2_KEY],
-            s1=match[roundConsts.PLAYER_1_SCORE_KEY],
-            s2=match[roundConsts.PLAYER_2_SCORE_KEY]
-        )
-    )
-
-
 def printAllTournamentRounds(serializedTournament: dict):
     """ function allowing to print all rounds contained in a tournament,
         from a dictionnary containing one serialized tournament instance """
@@ -223,7 +294,7 @@ def printAllTournamentRounds(serializedTournament: dict):
         print((" " * 4) + roundConsts.END_KEY + " : " + roundEnd)
 
         for i in range(len(matchList)):
-            printMatch(matchList[i], i + 1)
+            AppView.print_serialized_match(matchList[i], i + 1)
 
         AppView.blankLine()
 
@@ -240,7 +311,7 @@ def printAllTournamentMatch(serializedTournament: dict):
 
     for round in serializedRounds.values():
         for match in round[roundConsts.MATCH_LIST_KEY]:
-            printMatch(match, matchIndex)
+            AppView.print_serialized_match(match, matchIndex)
             matchIndex += 1
     print(" ")
 

@@ -40,8 +40,34 @@ class Round:
     def getMatchs(cls) -> list:
         return cls.__m_matchList
 
+    def printMatch(cls, index: int, indent: int = 4):
+
+        match = cls.__m_matchList[index]
+
+        p1: Player = match[0][0]
+        p2: Player = match[1][0]
+
+        p1_score: int = match[0][1]
+        p2_score: int = match[1][1]
+
+        print(
+            (" " * indent) + "Match {index} : {p1}({s1}) vs {p2} ({s2})".format(
+                index=index + 1,
+                p1=p1.getFullName(),
+                p2=p2.getFullName(),
+                s1=p1_score,
+                s2=p2_score
+            )
+        )
+
     def getEndTime(cls) -> datetime:
         return cls.__m_end
+
+    def getStrBeginTime(cls) -> str:
+        return cls.__m_begin.strftime(config.HOUR_FORMAT)
+
+    def getStrEndTime(cls) -> str:
+        return cls.__m_end.strftime(config.HOUR_FORMAT)
 
     def serializeMatch(cls, match: tuple) -> dict:
 

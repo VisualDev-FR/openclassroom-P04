@@ -1,6 +1,7 @@
 from Models.round import Round
 from Models.player import Player
 from Models.tournament import tournamentConst
+from Config import roundConsts
 import os
 
 
@@ -77,6 +78,22 @@ def printTournaments(tournaments: dict):
         print("    [{index}] : Le {date} : {fullName}".format(index=i, fullName=tournament, date=tDate))
 
     blankLine()
+
+
+def print_serialized_match(match: tuple, index: int):
+    """ generic function allowing to print a match with the next format :
+
+        Match 1 : player1 (score) vs player2 (score) """
+
+    print(
+        (" " * 4) + "Match {index} : {p1}({s1}) vs {p2} ({s2})".format(
+            index=index,
+            p1=match[roundConsts.PLAYER_1_KEY],
+            p2=match[roundConsts.PLAYER_2_KEY],
+            s1=match[roundConsts.PLAYER_1_SCORE_KEY],
+            s2=match[roundConsts.PLAYER_2_SCORE_KEY]
+        )
+    )
 
 
 def blankLine():

@@ -45,6 +45,9 @@ class Tournament:
         self.__m_playersList = []
         self.__m_roundsList = []
 
+    def getRounds(cls) -> typing.List[Round]:
+        return cls.__m_roundsList
+
     def addPlayer(cls, player: Player) -> None:
         cls.__m_playersList.append(player)
 
@@ -63,8 +66,20 @@ class Tournament:
     def getDate(cls) -> datetime:
         return cls.__m_date
 
+    def getStrDate(cls) -> str:
+        return cls.__m_date.strftime(config.DATE_FORMAT)
+
     def getName(cls) -> str:
         return cls.__m_name
+
+    def getLocation(cls) -> str:
+        return cls.__m_location
+
+    def getStrTimecontrol(cls) -> str:
+        return TimeControl(cls.__m_timecontrol).name
+
+    def getDescription(cls) -> str:
+        return cls.__m_Description
 
     def getSerializedRounds(cls) -> dict:
 

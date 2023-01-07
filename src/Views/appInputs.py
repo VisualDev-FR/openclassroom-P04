@@ -142,7 +142,7 @@ def ask_user_to_load_buffer(indent: int = 4) -> bool:
     while answer == "":
 
         answer: str = input(
-            (" " * indent) + "Voulez-vous charger le tournoi précédemment créé ? Oui[0] Non[1]"
+            (" " * indent) + "Voulez-vous charger le tournoi précédemment créé ? Oui[0] Non[1] : "
         )
 
         if answer == "0":
