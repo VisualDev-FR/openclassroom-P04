@@ -1,12 +1,14 @@
 from Controllers import tournamentManager, playerManager, dbManager
-from Views import appView as AppView
+from Views import appView
+from Models.tournamentBuffer import TournamentBuffer
 
+buffer: TournamentBuffer = None
 runtime = True
 
 while runtime:
 
-    AppView.clearConsole()
-    AppView.printSection("MENU PRINCIPAL")
+    appView.clearConsole()
+    appView.printSection("MENU PRINCIPAL")
 
     print("[1] : Créer un nouveau tournoi")
     print("[2] : Créer un nouveau joueur")
@@ -16,17 +18,17 @@ while runtime:
     print("[6] : Modifier le classement d'un joueur")
     print("[7] : Quitter l'application\n")
 
-    AppView.printSection(" ")
+    appView.printSection(" ")
 
     try:
 
         choice = input()
 
-        AppView.clearConsole()
+        appView.clearConsole()
 
         if (choice == "1"):
-            # open the tournamentFactory
-            tournamentManager.createTournament()
+            # open the tournamentFactory to create a new tournament
+            buffer = tournamentManager.createTournament(buffer)
 
         elif choice == "2":
             # open the player factory
@@ -50,7 +52,7 @@ while runtime:
 
         elif choice == "7":
             # Clear the console and break the runtime
-            AppView.clearConsole()
+            appView.clearConsole()
 
             # exit the application
             runtime = False

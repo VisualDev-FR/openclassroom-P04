@@ -133,3 +133,21 @@ def inputWinner(player1: Player, player2: Player, indent: int = 4) -> Player:
             )
 
     return winner
+
+
+def ask_user_to_load_buffer(indent: int = 4) -> bool:
+
+    answer: str = ""
+
+    while answer == "":
+
+        answer: str = input(
+            (" " * indent) + "Voulez-vous charger le tournoi précédemment créé ? Oui[0] Non[1]"
+        )
+
+        if answer == "0":
+            return True
+        elif answer == "1":
+            return False
+        else:
+            answer = ""

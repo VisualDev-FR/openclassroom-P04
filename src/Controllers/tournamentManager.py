@@ -1,5 +1,6 @@
 from Models.tournament import Tournament, TimeControl
 from Models.player import Player
+from Models.tournamentBuffer import TournamentBuffer
 import Views.appInputs as AppInput
 import Views.appView as AppView
 import Controllers.roundManager as roundManager
@@ -8,9 +9,28 @@ from Config import tournamentConst, roundConsts
 import typing
 
 
-def createTournament():
+def createTournament(buffer: TournamentBuffer) -> TournamentBuffer:
     """ main function allowing to create a tournament from the user inputs
         and save it into the database """
+
+    if buffer is None:
+        return create_tournament_from_scratch()
+
+    else:
+        userWantsToLoadBuffer: bool = AppInput.ask_user_to_load_buffer()
+
+        if userWantsToLoadBuffer:
+            return create_tournament_from_buffer(buffer=buffer)
+
+        else:
+            return create_tournament_from_scratch()
+
+
+def create_tournament_from_buffer(buffer: TournamentBuffer) -> TournamentBuffer:
+    pass
+
+
+def create_tournament_from_scratch() -> TournamentBuffer:
 
     # print the current section
     AppView.printSection("DEFINITION DU TOURNOI")
